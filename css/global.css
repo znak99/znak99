@@ -1,0 +1,80 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Variables */
+:root {
+  --bg-color: #232323;
+  --bg-box-outer-color: #292929;
+  --bg-box-inner-color: #333333;
+  --primary-color: #32ec5a;
+  --secondary-color: #e0e6e1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans', 'Noto Sans KR', 'Noto Sans JP', serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.container {
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.page {
+  height: 100vh;
+  scroll-snap-align: start;
+  padding-top: 6rem;
+}
+
+/* Bg */
+.bg-element {
+  width: 30%;
+  height: 200vh;
+  background-color: var(--bg-box-outer-color);
+  margin-left: 50%;
+  box-shadow: 0 0 50px var(--bg-box-outer-color);
+  transform: rotate(20deg);
+  position: fixed;
+  top: -50%;
+}
+
+.bg-element::before {
+  content: '';
+  display: block;
+  width: 80%;
+  height: 200vh;
+  margin: auto;
+  background-color: var(--bg-box-inner-color);
+  box-shadow: 0 0 50px var(--bg-box-inner-color);
+}

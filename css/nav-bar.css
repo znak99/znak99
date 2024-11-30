@@ -1,0 +1,57 @@
+nav {
+  position: fixed;
+  top: 0;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  padding: 1rem;
+}
+
+nav > .logo {
+  font-size: 2rem;
+  line-height: 1;
+  text-align: end;
+  font-weight: 900;
+
+  color: var(--secondary-color);
+}
+
+nav > .nav-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 2rem;
+  width: 100%;
+  max-width: 800px;
+  min-width: 500px;
+}
+
+nav > .nav-menu > li > a {
+  color: var(--secondary-color);
+  font-weight: 500;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+nav > .nav-menu > li > a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  border-radius: 3px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav > .nav-menu > li > a:hover::before {
+  width: 100%;
+  left: 0;
+}
