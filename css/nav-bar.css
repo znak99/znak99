@@ -18,7 +18,7 @@ nav > .logo {
   text-align: end;
   font-weight: 900;
 
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 nav > .nav-menu {
@@ -33,7 +33,7 @@ nav > .nav-menu {
 }
 
 nav > .nav-menu > li > a {
-  color: var(--secondary-color);
+  color: var(--primary-color);
   font-weight: 500;
   font-size: 1.1rem;
   position: relative;
@@ -47,7 +47,7 @@ nav > .nav-menu > li > a::before {
   width: 0;
   height: 3px;
   border-radius: 3px;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   transition: width 0.3s ease, left 0.3s ease;
 }
 
