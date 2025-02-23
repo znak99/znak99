@@ -1,0 +1,8 @@
+#overview > h1 {
+  color: var(--secondary-color);
+  position: relative;
+  font-weight: 800;
+  font-size: 5rem;
+  margin-top: 3rem;
+  text-shadow: 0.5rem 0.5rem 0.5rem var(--secondary-shadow-color);
+}

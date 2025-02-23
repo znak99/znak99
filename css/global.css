@@ -4,10 +4,9 @@
 /* Variables */
 :root {
   --bg-color: #232323;
-  --bg-box-outer-color: #292929;
-  --bg-box-inner-color: #333333;
   --primary-color: #e0e6e1;
   --secondary-color: #32ec5a;
+  --secondary-shadow-color: #32ec5a50;
 }
 
 * {
@@ -19,6 +18,10 @@
 
 body {
   background-color: var(--bg-color);
+  background-image: url('../images/background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   overflow: hidden;
 }
 
@@ -55,26 +58,4 @@ button {
   height: 100vh;
   scroll-snap-align: start;
   padding-top: 6rem;
-}
-
-/* Bg */
-.bg-element {
-  width: 30%;
-  height: 200vh;
-  background-color: var(--bg-box-outer-color);
-  margin-left: 50%;
-  box-shadow: 0 0 50px var(--bg-box-outer-color);
-  transform: rotate(20deg);
-  position: fixed;
-  top: -50%;
-}
-
-.bg-element::before {
-  content: '';
-  display: block;
-  width: 80%;
-  height: 200vh;
-  margin: auto;
-  background-color: var(--bg-box-inner-color);
-  box-shadow: 0 0 50px var(--bg-box-inner-color);
 }
