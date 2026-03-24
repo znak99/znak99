@@ -1,62 +1,134 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seungwoo's Portfolio</title>
 
-    <!-- Font Awesome -->
-    <script
-      src="https://kit.fontawesome.com/b3ff2abea9.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
 
-    <!-- Favicon -->
-    <link rel="icon" href="./images/favicon/favicon.ico" type="image/x-icon" />
+    <script src="js/i18n.js" defer></script>
+    <script src="js/header.js" defer></script>
+</head>
+<body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="./css/global.css" />
-    <link rel="stylesheet" href="./css/nav-bar.css" />
-    <link rel="stylesheet" href="./css/overview.css" />
-    <link rel="stylesheet" href="./css/profile.css" />
-    <link rel="stylesheet" href="./css/tech-stack.css" />
-    <link rel="stylesheet" href="./css/porfolio.css" />
-    <link rel="stylesheet" href="./css/contact.css" />
-  </head>
-  <body>
-    <!-- Container -->
-    <div class="container">
-      <!-- Background -->
-      <!-- <div class="bg-element"></div> -->
+    <header class="header" id="header">
+        <div class="header__inner">
+            <div class="logo" aria-label="Portfolio logo">
+                HONG SEUNGWOO
+            </div>
 
-      <!-- Navigation Bar -->
-      <nav>
-        <h1 class="logo">HONG<br />SEUNGWOO</h1>
-        <ul class="nav-menu">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#profile">Profile</a></li>
-          <li><a href="#tech-stack">Tech Stack</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+            <nav class="nav" aria-label="Primary navigation">
+                <ul class="nav__list">
+                    <li><a class="nav__link" href="#overview">Overview</a></li>
+                    <li><a class="nav__link" href="#about">About Me</a></li>
+                    <li><a class="nav__link" href="#skills">Skills</a></li>
+                    <li><a class="nav__link" href="#projects">Projects</a></li>
+                    <li><a class="nav__link" href="#contact">Contact</a></li>
+                </ul>
+            </nav>
 
-      <!-- Overview -->
-      <div id="overview" class="page">
-        <h1>Welcome to My Portfolio!</h1>
-      </div>
+            <div class="header__actions">
+                <div class="lang-switch" aria-label="Language switcher" role="group">
+                    <button class="lang-switch__button is-active" type="button" data-lang="ko">
+                        <span class="lang-switch__label">KR</span>
+                    </button>
+                    <button class="lang-switch__button" type="button" data-lang="ja">
+                        <span class="lang-switch__label">JP</span>
+                    </button>
+                    <button class="lang-switch__button" type="button" data-lang="en">
+                        <span class="lang-switch__label">EN</span>
+                    </button>
+                </div>
 
-      <!-- Profile -->
-      <div id="profile" class="page">2</div>
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="mobileMenu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-      <!-- Tech Stack -->
-      <div id="tech-stack" class="page">3</div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+            <a class="mobile-menu__link" href="#overview">Overview</a>
+            <a class="mobile-menu__link" href="#about">About Me</a>
+            <a class="mobile-menu__link" href="#skills">Skills</a>
+            <a class="mobile-menu__link" href="#projects">Projects</a>
+            <a class="mobile-menu__link" href="#contact">Contact</a>
+        </nav>
 
-      <!-- Portfolio -->
-      <div id="portfolio" class="page">4</div>
-
-      <!-- Contact -->
-      <div id="contact" class="page">5</div>
+        <div class="mobile-menu__lang" aria-label="Mobile language switcher" role="group">
+            <button class="lang-switch__button is-active" type="button" data-lang="ko">
+                <span class="lang-switch__label">KR</span>
+            </button>
+            <button class="lang-switch__button" type="button" data-lang="ja">
+                <span class="lang-switch__label">JP</span>
+            </button>
+            <button class="lang-switch__button" type="button" data-lang="en">
+                <span class="lang-switch__label">EN</span>
+            </button>
+        </div>
     </div>
-  </body>
+
+    <main>
+        <section class="section section--placeholder" id="overview">
+            <div class="section__inner">
+                <p class="section__eyebrow" data-i18n="overview_eyebrow">PORTFOLIO</p>
+                <h1 class="section__title" data-i18n="overview_title">안녕하세요, 홍승우입니다.</h1>
+                <p class="section__text" data-i18n="overview_text">
+                    사용자 경험과 완성도를 함께 고민하는 개발자 포트폴리오입니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="section section--placeholder" id="about">
+            <div class="section__inner">
+                <h2 class="section__title" data-i18n="about_title">저를 소개합니다.</h2>
+                <p class="section__text" data-i18n="about_text">
+                    문제를 구조적으로 바라보고, 보기 좋은 화면과 읽기 좋은 코드를 함께 만들고 싶습니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="section section--placeholder" id="skills">
+            <div class="section__inner">
+                <h2 class="section__title" data-i18n="skills_title">기술 스택</h2>
+                <p class="section__text" data-i18n="skills_text">
+                    프론트엔드 중심으로 다양한 기술을 학습하고 프로젝트에 적용하고 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="section section--placeholder" id="projects">
+            <div class="section__inner">
+                <h2 class="section__title" data-i18n="projects_title">프로젝트</h2>
+                <p class="section__text" data-i18n="projects_text">
+                    직접 구현하며 배운 내용과 개선 과정을 프로젝트에 담고 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="section section--placeholder" id="contact">
+            <div class="section__inner">
+                <h2 class="section__title" data-i18n="contact_title">연락하기</h2>
+                <p class="section__text" data-i18n="contact_text">
+                    협업이나 문의가 있다면 언제든지 편하게 연락해주세요.
+                </p>
+            </div>
+        </section>
+    </main>
+</body>
 </html>
