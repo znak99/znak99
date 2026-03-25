@@ -71,6 +71,7 @@
     <link rel="stylesheet" href="css/header-controls.css">
     <link rel="stylesheet" href="css/overview.css">
     <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/skills.css">
     <link rel="stylesheet" href="css/language-transition.css">
 
     <script type="module" src="js/main.js"></script>
@@ -351,10 +352,148 @@
             </div>
         </section>
 
-        <section class="section" id="skills" aria-labelledby="skills-title">
-            <div class="section__inner">
-                <h2 class="section__title" id="skills-title" data-i18n="skills_title"></h2>
-                <p class="section__text" data-i18n="skills_text"></p>
+        <!-- Skills -->
+        <section class="section section--skills" id="skills" aria-labelledby="skills-title">
+            <div class="section__inner skills">
+                <div class="skills__top">
+                    <div class="skills__heading">
+                        <p class="section__eyebrow" data-i18n="skills_eyebrow"></p>
+                        <h2 class="section__title skills__title" id="skills-title" data-i18n="skills_title"></h2>
+                        <p class="section__text skills__lead" data-i18n="skills_intro"></p>
+                    </div>
+                </div>
+
+                <div class="skills__grid">
+                    <article class="skills__group" aria-labelledby="skills-group-title-1">
+                        <header class="skills__group-head">
+                            <span class="skills__group-index" aria-hidden="true">01</span>
+                            <div>
+                                <p class="skills__group-label" data-i18n="skills_group_label_1"></p>
+                                <h3 class="skills__group-title" id="skills-group-title-1" data-i18n="skills_group_title_1"></h3>
+                            </div>
+                        </header>
+                        <p class="skills__group-text" data-i18n="skills_group_text_1"></p>
+                        <ul class="skills__tags" role="list" aria-label="Foundation skills">
+                            <li>HTML5</li>
+                            <li>Semantic Markup</li>
+                            <li>Section Structure</li>
+                            <li>Basic A11y</li>
+                        </ul>
+                    </article>
+
+                    <article class="skills__group" aria-labelledby="skills-group-title-2">
+                        <header class="skills__group-head">
+                            <span class="skills__group-index" aria-hidden="true">02</span>
+                            <div>
+                                <p class="skills__group-label" data-i18n="skills_group_label_2"></p>
+                                <h3 class="skills__group-title" id="skills-group-title-2" data-i18n="skills_group_title_2"></h3>
+                            </div>
+                        </header>
+                        <p class="skills__group-text" data-i18n="skills_group_text_2"></p>
+                        <ul class="skills__tags" role="list" aria-label="Styling skills">
+                            <li>CSS3</li>
+                            <li>Flexbox</li>
+                            <li>Grid</li>
+                            <li>Responsive UI</li>
+                        </ul>
+                    </article>
+
+                    <article class="skills__group" aria-labelledby="skills-group-title-3">
+                        <header class="skills__group-head">
+                            <span class="skills__group-index" aria-hidden="true">03</span>
+                            <div>
+                                <p class="skills__group-label" data-i18n="skills_group_label_3"></p>
+                                <h3 class="skills__group-title" id="skills-group-title-3" data-i18n="skills_group_title_3"></h3>
+                            </div>
+                        </header>
+                        <p class="skills__group-text" data-i18n="skills_group_text_3"></p>
+                        <ul class="skills__tags" role="list" aria-label="Workflow skills">
+                            <li>JavaScript ES6+</li>
+                            <li>DOM Control</li>
+                            <li>Git / GitHub</li>
+                            <li>i18n UI Flow</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <section class="skills-board" aria-labelledby="skills-board-title">
+                    <div class="skills-board__header">
+                        <div class="skills-board__copy">
+                            <p class="skills-board__label" data-i18n="skills_graph_label"></p>
+                            <h3 class="skills-board__title" id="skills-board-title" data-i18n="skills_graph_title"></h3>
+                            <p class="skills-board__text" data-i18n="skills_graph_text"></p>
+                        </div>
+
+                        <div
+                            class="skills-board__tabs"
+                            role="tablist"
+                            data-i18n="skills_tabs_label"
+                            data-i18n-attr="aria-label"
+                        >
+                            <button
+                                class="skills-board__tab is-active"
+                                type="button"
+                                role="tab"
+                                id="skills-tab-frontend"
+                                aria-selected="true"
+                                aria-controls="skills-board-panel"
+                                data-skill-tab="frontend"
+                            >
+                                FrontEnd
+                            </button>
+                            <button
+                                class="skills-board__tab"
+                                type="button"
+                                role="tab"
+                                id="skills-tab-backend"
+                                aria-selected="false"
+                                aria-controls="skills-board-panel"
+                                data-skill-tab="backend"
+                            >
+                                BackEnd
+                            </button>
+                            <button
+                                class="skills-board__tab"
+                                type="button"
+                                role="tab"
+                                id="skills-tab-tools"
+                                aria-selected="false"
+                                aria-controls="skills-board-panel"
+                                data-skill-tab="tools"
+                            >
+                                Tools
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="skills-board__scale" aria-describedby="skills-board-hint">
+                        <div class="skills-board__axis">
+                            <span class="skills-board__axis-label">0%</span>
+                            <button class="skills-board__axis-point" type="button" data-skill-level="25">
+                                <span>25%</span>
+                            </button>
+                            <button class="skills-board__axis-point" type="button" data-skill-level="50">
+                                <span>50%</span>
+                            </button>
+                            <button class="skills-board__axis-point" type="button" data-skill-level="75">
+                                <span>75%</span>
+                            </button>
+                            <button class="skills-board__axis-point" type="button" data-skill-level="100">
+                                <span>100%</span>
+                            </button>
+                        </div>
+                        <p class="skills-board__hint" id="skills-board-hint"></p>
+                    </div>
+
+                    <div
+                        class="skills-board__panel"
+                        id="skills-board-panel"
+                        role="tabpanel"
+                        aria-labelledby="skills-tab-frontend"
+                    >
+                        <div class="skills-board__chart" data-skills-chart></div>
+                    </div>
+                </section>
             </div>
         </section>
 

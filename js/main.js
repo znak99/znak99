@@ -2,6 +2,7 @@
 import { initializeBackgroundMotion } from "./background.js";
 import { initializeHeader } from "./header.js";
 import { initializeLanguageSwitcher } from "./language.js";
+import { initializeSkillsBoard } from "./skills.js";
 
 function finishInitialLoad() {
     const loadingScreen = document.getElementById("loadingScreen");
@@ -20,6 +21,7 @@ function initializePortfolio() {
         initializeBackgroundMotion();
         initializeHeader();
         initializeLanguageSwitcher();
+        initializeSkillsBoard();
     } finally {
         finishInitialLoad();
     }

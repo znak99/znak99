@@ -106,6 +106,9 @@ function applyTranslations(language) {
     currentLanguage = language;
     updateLanguageButtons(language);
     updateMenuButtonLabel(undefined, language);
+    document.dispatchEvent(new CustomEvent("portfolio:languagechange", {
+        detail: { language }
+    }));
 }
 
 function updateLanguageButtons(language) {
