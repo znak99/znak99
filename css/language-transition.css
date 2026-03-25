@@ -1,0 +1,31 @@
+/* Language transition */
+main,
+.mobile-menu {
+    transform-origin: top center;
+    transition:
+        opacity 0.28s ease,
+        transform 0.28s ease,
+        filter 0.28s ease;
+}
+
+body.is-language-changing main,
+body.is-language-changing .mobile-menu.is-open {
+    opacity: 0.5;
+    transform: translateY(8px) scale(0.995);
+    filter: blur(10px);
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    main,
+    .mobile-menu {
+        transition: none;
+    }
+
+    body.is-language-changing main,
+    body.is-language-changing .mobile-menu.is-open {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
