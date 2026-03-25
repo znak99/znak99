@@ -4,10 +4,7 @@ import { updateMenuButtonLabel } from "./language.js";
 const HEADER_SCROLL_THRESHOLD = 20;
 const DESKTOP_MEDIA_QUERY = "(min-width: 769px)";
 const MANUAL_SCROLL_INTENT_WINDOW_MS = 900;
-const ACTIVE_SECTION_OPTIONS = {
-    rootMargin: "-35% 0px -45% 0px",
-    threshold: [0.2, 0.45, 0.7]
-};
+const ACTIVE_SECTION_OFFSET = 28;
 const SCROLL_TRIGGER_KEYS = new Set([
     "ArrowDown",
     "ArrowUp",
@@ -42,7 +39,6 @@ export function initializeHeader() {
     }
 
     const desktopMediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
-    const visibleSections = new Map();
     let hasPlayedInitialScrollSweep = false;
     let manualScrollIntentUntil = 0;
 
@@ -91,31 +87,21 @@ export function initializeHeader() {
         });
     };
 
-    // 가장 크게 보이는 섹션을 현재 위치로 간주한다.
+    // 헤더 바로 아래 기준선을 통과한 마지막 섹션을 현재 위치로 본다.
     const resolveActiveSection = () => {
-        const currentSection = [...visibleSections.entries()]
-            .sort(([, previousRatio], [, nextRatio]) => nextRatio - previousRatio)[0]?.[0];
+        const activeLine = window.scrollY + header.offsetHeight + ACTIVE_SECTION_OFFSET;
+        let currentSectionId = sections[0].id;
 
-        if (currentSection) {
-            updateActiveLinks(currentSection);
-        }
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                visibleSections.set(entry.target.id, entry.intersectionRatio);
-            } else {
-                visibleSections.delete(entry.target.id);
+        sections.forEach((section) => {
+            if (section.offsetTop <= activeLine) {
+                currentSectionId = section.id;
             }
         });
 
-        resolveActiveSection();
-    }, ACTIVE_SECTION_OPTIONS);
-
-    sections.forEach((section) => {
-        sectionObserver.observe(section);
-    });
+        if (currentSectionId) {
+            updateActiveLinks(currentSectionId);
+        }
+    };
 
     const closeMobileMenu = () => setMenuState(false);
 
@@ -125,6 +111,16 @@ export function initializeHeader() {
 
     document.querySelectorAll(".mobile-menu__link").forEach((link) => {
         link.addEventListener("click", closeMobileMenu);
+    });
+
+    allNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            const targetId = link.getAttribute("href")?.slice(1);
+
+            if (targetId) {
+                updateActiveLinks(targetId);
+            }
+        });
     });
 
     // 휠 입력은 가장 명확한 수동 스크롤 의도이므로 짧게 허용 창을 연다.
@@ -176,7 +172,13 @@ export function initializeHeader() {
         }
     });
 
-    window.addEventListener("scroll", updateHeaderState, { passive: true });
+    const handleScroll = () => {
+        updateHeaderState();
+        resolveActiveSection();
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", resolveActiveSection);
 
     const handleDesktopLayoutChange = (event) => {
         if (event.matches) {
@@ -192,5 +194,5 @@ export function initializeHeader() {
 
     setMenuState(false);
     updateHeaderState();
-    updateActiveLinks(sections[0].id);
+    resolveActiveSection();
 }

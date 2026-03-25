@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/header-controls.css">
+    <link rel="stylesheet" href="css/overview.css">
 
     <script type="module" src="js/main.js"></script>
 </head>
@@ -175,13 +176,93 @@
 
     <!-- Main content -->
     <main id="main-content">
-        <section class="section" id="overview" aria-labelledby="overview-title">
-            <div class="section__inner">
-                <p class="section__eyebrow" data-i18n="overview_eyebrow">PORTFOLIO</p>
-                <h1 class="section__title" id="overview-title" data-i18n="overview_title">안녕하세요, 홍승우입니다.</h1>
-                <p class="section__text" data-i18n="overview_text">
-                    사용자 경험과 완성도를 함께 고민하는 개발자 포트폴리오입니다.
-                </p>
+        <!-- Overview -->
+        <section class="section section--overview" id="overview" aria-labelledby="overview-title">
+            <div class="section__inner overview">
+                <div class="overview__intro">
+                    <div class="overview__copy">
+                        <p class="section__eyebrow" data-i18n="overview_eyebrow">OVERVIEW</p>
+                        <p class="overview__kicker" data-i18n="overview_kicker">FRONTEND / UX / MULTILINGUAL</p>
+                        <h1 class="section__title overview__title" id="overview-title" data-i18n="overview_title">
+                            차분한 구조와 선명한 인터랙션을 함께 설계합니다.
+                        </h1>
+                        <p class="section__text overview__lead" data-i18n="overview_text">
+                            HTML, CSS, JavaScript로 반응형 웹과 다국어 경험을 정리하는 프론트엔드 포트폴리오입니다.
+                        </p>
+                        <p class="overview__support" data-i18n="overview_support">
+                            현재 문구와 지표는 레이아웃 검토를 위한 더미 데이터입니다. 이후 실제 이력, 직력, 프로젝트 내용에 맞춰 교체할 예정입니다.
+                        </p>
+
+                        <div class="overview__actions">
+                            <a class="overview__button" href="#projects" data-i18n="overview_cta_primary">프로젝트 보기</a>
+                            <a class="overview__button overview__button--ghost" href="#contact" data-i18n="overview_cta_secondary">연락하기</a>
+                        </div>
+                    </div>
+
+                    <aside class="overview__panel" aria-labelledby="overview-panel-title">
+                        <p class="overview__panel-eyebrow" data-i18n="overview_panel_eyebrow">CURRENT TRACK</p>
+                        <h2 class="overview__panel-title" id="overview-panel-title" data-i18n="overview_panel_title">
+                            지금은 기본기와 완성도를 동시에 다듬는 단계입니다.
+                        </h2>
+
+                        <dl class="overview__panel-list">
+                            <div class="overview__panel-item">
+                                <dt data-i18n="overview_panel_item_label_1">Primary Focus</dt>
+                                <dd data-i18n="overview_panel_item_value_1">Responsive Portfolio UI</dd>
+                            </div>
+                            <div class="overview__panel-item">
+                                <dt data-i18n="overview_panel_item_label_2">Working With</dt>
+                                <dd data-i18n="overview_panel_item_value_2">HTML / CSS / JavaScript</dd>
+                            </div>
+                            <div class="overview__panel-item">
+                                <dt data-i18n="overview_panel_item_label_3">Language Support</dt>
+                                <dd data-i18n="overview_panel_item_value_3">Korean / Japanese / English</dd>
+                            </div>
+                            <div class="overview__panel-item">
+                                <dt data-i18n="overview_panel_item_label_4">Next Section</dt>
+                                <dd data-i18n="overview_panel_item_value_4">About Me / Skills / Projects</dd>
+                            </div>
+                        </dl>
+
+                        <div class="overview__signal" aria-hidden="true">
+                            <span class="overview__signal-dot overview__signal-dot--1"></span>
+                            <span class="overview__signal-dot overview__signal-dot--2"></span>
+                            <span class="overview__signal-dot overview__signal-dot--3"></span>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="overview__footer">
+                    <dl class="overview__metrics">
+                        <div class="overview__metric">
+                            <dt data-i18n="overview_metric_label_1">BUILD MODE</dt>
+                            <dd data-i18n="overview_metric_value_1">Layout Prototype</dd>
+                        </div>
+                        <div class="overview__metric">
+                            <dt data-i18n="overview_metric_label_2">INTERFACE</dt>
+                            <dd data-i18n="overview_metric_value_2">Mobile to Desktop</dd>
+                        </div>
+                        <div class="overview__metric">
+                            <dt data-i18n="overview_metric_label_3">VISUAL TONE</dt>
+                            <dd data-i18n="overview_metric_value_3">Dark Glass / Green Accent</dd>
+                        </div>
+                    </dl>
+
+                    <ul
+                        class="overview__stack"
+                        aria-label="Overview stack keywords"
+                        role="list"
+                        data-i18n="overview_stack_label"
+                        data-i18n-attr="aria-label"
+                    >
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>Responsive</li>
+                        <li>i18n</li>
+                        <li>A11y</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
