@@ -1,5 +1,5 @@
 // 공통 메타 상수와 다국어 사전을 관리한다.
-export const DEFAULT_LANGUAGE = "ko";
+export const DEFAULT_LANGUAGE = "en";
 export const SITE_TITLE = "Hong Seungwoo | Frontend Developer Portfolio";
 
 export const STORAGE_KEYS = {
@@ -41,7 +41,6 @@ export const I18N = {
         overview_panel_item_value_4: "About Me / Skills / Projects",
         about_eyebrow: "ABOUT ME",
         about_title: "기초를 다지면서 화면의 완성도를 함께 끌어올리고 있습니다.",
-        about_text: "문제를 구조적으로 바라보고, 보기 좋은 화면과 읽기 좋은 코드를 함께 만들고 싶습니다.",
         about_intro: "프론트엔드의 기본을 단단히 이해하고, 언어 전환과 반응형 흐름까지 자연스럽게 연결하는 화면을 만들고 있습니다.",
         about_note: "현재 프로필 정보는 레이아웃 검토를 위한 더미 데이터입니다. 이후 실제 이력과 학습 흐름에 맞춰 교체할 예정입니다.",
         about_profile_label: "PROFILE SNAPSHOT",
@@ -100,7 +99,6 @@ export const I18N = {
         overview_panel_item_value_4: "About Me / Skills / Projects",
         about_eyebrow: "ABOUT ME",
         about_title: "基礎を積み上げながら、画面の完成度も一緒に高めています。",
-        about_text: "問題を構造的に捉え、見やすい画面と読みやすいコードを一緒に作りたいと考えています。",
         about_intro: "フロントエンドの基礎をしっかり理解しながら、言語切替とレスポンシブの流れが自然につながる画面を作っています。",
         about_note: "現在のプロフィール情報はレイアウト確認のためのダミーデータです。後で実際の経歴と学習の流れに合わせて置き換える予定です。",
         about_profile_label: "PROFILE SNAPSHOT",
@@ -159,7 +157,6 @@ export const I18N = {
         overview_panel_item_value_4: "About Me / Skills / Projects",
         about_eyebrow: "ABOUT ME",
         about_title: "I am building stronger fundamentals while improving the finish of each screen.",
-        about_text: "I want to approach problems structurally and build interfaces that look good and code that reads well.",
         about_intro: "I am focusing on solid frontend fundamentals while building interfaces where language switching and responsive flow feel natural.",
         about_note: "The current profile details are placeholder data for layout review. They will be replaced later with actual background and learning history.",
         about_profile_label: "PROFILE SNAPSHOT",

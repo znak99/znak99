@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="und">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hong Seungwoo | Frontend Developer Portfolio</title>
     <meta
         name="description"
-        content="프론트엔드 개발과 사용자 경험에 집중하는 홍승우의 포트폴리오 웹페이지입니다. 스킬, 프로젝트, 그리고 개발 방향성을 소개합니다."
+        content="Hong Seungwoo's portfolio website focused on frontend development and polished user experience."
     >
     <meta name="author" content="Hong Seungwoo">
     <meta name="robots" content="index, follow">
@@ -17,17 +17,56 @@
     <meta property="og:title" content="Hong Seungwoo | Frontend Developer Portfolio">
     <meta
         property="og:description"
-        content="사용자 경험과 완성도를 함께 고민하는 개발자 홍승우의 포트폴리오입니다."
+        content="Hong Seungwoo's portfolio website focused on frontend development and polished user experience."
     >
-    <meta property="og:locale" content="ko_KR">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Hong Seungwoo | Frontend Developer Portfolio">
     <meta
         name="twitter:description"
-        content="프론트엔드 개발과 사용자 경험에 집중하는 홍승우의 포트폴리오 웹페이지입니다."
+        content="Hong Seungwoo's portfolio website focused on frontend development and polished user experience."
     >
 
+    <script>
+        (() => {
+            const STORAGE_KEY = "portfolio-language";
+            const supportedLanguages = new Set(["ko", "ja", "en"]);
+            const storedLanguage = (() => {
+                try {
+                    return localStorage.getItem(STORAGE_KEY);
+                } catch {
+                    return null;
+                }
+            })();
+
+            const detectSystemLanguage = () => {
+                const locales = Array.isArray(navigator.languages) && navigator.languages.length > 0
+                    ? navigator.languages
+                    : [navigator.language || ""];
+
+                if (locales.some((locale) => String(locale).toLowerCase().startsWith("ko"))) {
+                    return "ko";
+                }
+
+                if (locales.some((locale) => String(locale).toLowerCase().startsWith("ja"))) {
+                    return "ja";
+                }
+
+                return "en";
+            };
+
+            const initialLanguage = supportedLanguages.has(storedLanguage)
+                ? storedLanguage
+                : detectSystemLanguage();
+
+            document.documentElement.lang = initialLanguage;
+            document.documentElement.dataset.language = initialLanguage;
+            document.documentElement.classList.add("is-loading");
+        })();
+    </script>
+
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/header-controls.css">
     <link rel="stylesheet" href="css/overview.css">
@@ -35,10 +74,24 @@
     <link rel="stylesheet" href="css/language-transition.css">
 
     <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/language-transition.js"></script>
 </head>
 <body>
-    <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Skip to content</a>
+    <div class="loading-screen" id="loadingScreen" role="status" aria-live="polite">
+        <div class="loading-screen__inner">
+            <p class="loading-screen__brand">HONG SEUNGWOO</p>
+            <div class="loading-screen__bar" aria-hidden="true">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <noscript>
+        <div class="noscript-message">
+            JavaScript is required to load this multilingual portfolio.
+        </div>
+    </noscript>
+
+    <a class="skip-link" href="#main-content" data-i18n="skip_to_content"></a>
 
     <!-- Background decoration -->
     <div class="bg-orb orb-1" aria-hidden="true"></div>
@@ -184,46 +237,38 @@
             <div class="section__inner overview">
                 <div class="overview__intro">
                     <div class="overview__copy">
-                        <p class="section__eyebrow" data-i18n="overview_eyebrow">OVERVIEW</p>
-                        <p class="overview__kicker" data-i18n="overview_kicker">FRONTEND / UX / MULTILINGUAL</p>
-                        <h1 class="section__title overview__title" id="overview-title" data-i18n="overview_title">
-                            차분한 구조와 선명한 인터랙션을 함께 설계합니다.
-                        </h1>
-                        <p class="section__text overview__lead" data-i18n="overview_text">
-                            HTML, CSS, JavaScript로 반응형 웹과 다국어 경험을 정리하는 프론트엔드 포트폴리오입니다.
-                        </p>
-                        <p class="overview__support" data-i18n="overview_support">
-                            현재 문구와 지표는 레이아웃 검토를 위한 더미 데이터입니다. 이후 실제 이력, 직력, 프로젝트 내용에 맞춰 교체할 예정입니다.
-                        </p>
+                        <p class="section__eyebrow" data-i18n="overview_eyebrow"></p>
+                        <p class="overview__kicker" data-i18n="overview_kicker"></p>
+                        <h1 class="section__title overview__title" id="overview-title" data-i18n="overview_title"></h1>
+                        <p class="section__text overview__lead" data-i18n="overview_text"></p>
+                        <p class="overview__support" data-i18n="overview_support"></p>
 
                         <div class="overview__actions">
-                            <a class="overview__button" href="#projects" data-i18n="overview_cta_primary">프로젝트 보기</a>
-                            <a class="overview__button overview__button--ghost" href="#contact" data-i18n="overview_cta_secondary">연락하기</a>
+                            <a class="overview__button" href="#projects" data-i18n="overview_cta_primary"></a>
+                            <a class="overview__button overview__button--ghost" href="#contact" data-i18n="overview_cta_secondary"></a>
                         </div>
                     </div>
 
                     <aside class="overview__panel" aria-labelledby="overview-panel-title">
-                        <p class="overview__panel-eyebrow" data-i18n="overview_panel_eyebrow">CURRENT TRACK</p>
-                        <h2 class="overview__panel-title" id="overview-panel-title" data-i18n="overview_panel_title">
-                            지금은 기본기와 완성도를 동시에 다듬는 단계입니다.
-                        </h2>
+                        <p class="overview__panel-eyebrow" data-i18n="overview_panel_eyebrow"></p>
+                        <h2 class="overview__panel-title" id="overview-panel-title" data-i18n="overview_panel_title"></h2>
 
                         <dl class="overview__panel-list">
                             <div class="overview__panel-item">
-                                <dt data-i18n="overview_panel_item_label_1">Primary Focus</dt>
-                                <dd data-i18n="overview_panel_item_value_1">Responsive Portfolio UI</dd>
+                                <dt data-i18n="overview_panel_item_label_1"></dt>
+                                <dd data-i18n="overview_panel_item_value_1"></dd>
                             </div>
                             <div class="overview__panel-item">
-                                <dt data-i18n="overview_panel_item_label_2">Working With</dt>
-                                <dd data-i18n="overview_panel_item_value_2">HTML / CSS / JavaScript</dd>
+                                <dt data-i18n="overview_panel_item_label_2"></dt>
+                                <dd data-i18n="overview_panel_item_value_2"></dd>
                             </div>
                             <div class="overview__panel-item">
-                                <dt data-i18n="overview_panel_item_label_3">Language Support</dt>
-                                <dd data-i18n="overview_panel_item_value_3">Korean / Japanese / English</dd>
+                                <dt data-i18n="overview_panel_item_label_3"></dt>
+                                <dd data-i18n="overview_panel_item_value_3"></dd>
                             </div>
                             <div class="overview__panel-item">
-                                <dt data-i18n="overview_panel_item_label_4">Next Section</dt>
-                                <dd data-i18n="overview_panel_item_value_4">About Me / Skills / Projects</dd>
+                                <dt data-i18n="overview_panel_item_label_4"></dt>
+                                <dd data-i18n="overview_panel_item_value_4"></dd>
                             </div>
                         </dl>
 
@@ -244,16 +289,10 @@
                     <aside class="about__profile" aria-labelledby="about-profile-title">
                         <div class="about__avatar" aria-hidden="true">HS</div>
                         <div class="about__profile-copy">
-                            <p class="about__profile-label" data-i18n="about_profile_label">PROFILE SNAPSHOT</p>
-                            <h3 class="about__profile-title" id="about-profile-title" data-i18n="about_profile_name">
-                                Hong Seungwoo
-                            </h3>
-                            <p class="about__profile-role" data-i18n="about_profile_role">
-                                Frontend Developer in Progress
-                            </p>
-                            <p class="about__profile-status" data-i18n="about_profile_status">
-                                Building a multilingual portfolio with responsive UI and clear interaction.
-                            </p>
+                            <p class="about__profile-label" data-i18n="about_profile_label"></p>
+                            <h3 class="about__profile-title" id="about-profile-title" data-i18n="about_profile_name"></h3>
+                            <p class="about__profile-role" data-i18n="about_profile_role"></p>
+                            <p class="about__profile-status" data-i18n="about_profile_status"></p>
                         </div>
 
                         <ul
@@ -263,61 +302,47 @@
                             data-i18n="about_profile_tags_label"
                             data-i18n-attr="aria-label"
                         >
-                            <li data-i18n="about_tag_1">UI Structure</li>
-                            <li data-i18n="about_tag_2">Responsive Layout</li>
-                            <li data-i18n="about_tag_3">i18n Flow</li>
-                            <li data-i18n="about_tag_4">Semantic Markup</li>
+                            <li data-i18n="about_tag_1"></li>
+                            <li data-i18n="about_tag_2"></li>
+                            <li data-i18n="about_tag_3"></li>
+                            <li data-i18n="about_tag_4"></li>
                         </ul>
                     </aside>
 
                     <div class="about__heading">
-                        <p class="section__eyebrow" data-i18n="about_eyebrow">ABOUT ME</p>
-                        <h2 class="section__title about__title" id="about-title" data-i18n="about_title">
-                            기초를 다지면서 화면의 완성도를 함께 끌어올리고 있습니다.
-                        </h2>
-                        <p class="section__text about__lead" data-i18n="about_intro">
-                            프론트엔드의 기본을 단단히 이해하고, 언어 전환과 반응형 흐름까지 자연스럽게 연결하는 화면을 만들고 있습니다.
-                        </p>
-                        <p class="about__note" data-i18n="about_note">
-                            현재 프로필 정보와 타임라인은 레이아웃 검토를 위한 더미 데이터입니다. 이후 실제 이력과 학습 흐름에 맞춰 교체할 예정입니다.
-                        </p>
+                        <p class="section__eyebrow" data-i18n="about_eyebrow"></p>
+                        <h2 class="section__title about__title" id="about-title" data-i18n="about_title"></h2>
+                        <p class="section__text about__lead" data-i18n="about_intro"></p>
+                        <p class="about__note" data-i18n="about_note"></p>
                     </div>
                 </div>
 
                 <div class="about__content">
                     <article class="about__story" aria-labelledby="about-story-title">
-                        <h3 class="about__subheading" id="about-story-title" data-i18n="about_story_title">
-                            HOW I WORK
-                        </h3>
-                        <p data-i18n="about_story_text_1">
-                            저는 화면을 만들 때 먼저 정보의 우선순위와 사용자 흐름을 정리한 뒤, 시각 요소와 상호작용을 쌓아가는 방식을 선호합니다.
-                        </p>
-                        <p data-i18n="about_story_text_2">
-                            특히 HTML, CSS, JavaScript의 기본기를 바탕으로 반응형 구조와 다국어 전환이 자연스럽게 이어지는 경험을 만드는 데 관심이 있습니다.
-                        </p>
+                        <h3 class="about__subheading" id="about-story-title" data-i18n="about_story_title"></h3>
+                        <p data-i18n="about_story_text_1"></p>
+                        <p data-i18n="about_story_text_2"></p>
                     </article>
 
                     <div class="about__rail">
                         <section class="about__facts" aria-labelledby="about-facts-title">
-                            <h3 class="about__subheading" id="about-facts-title" data-i18n="about_facts_title">
-                                PROFILE NOTES
-                            </h3>
+                            <h3 class="about__subheading" id="about-facts-title" data-i18n="about_facts_title"></h3>
                             <dl class="about__facts-list">
                                 <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_1">Focus</dt>
-                                    <dd data-i18n="about_fact_value_1">Semantic HTML and scalable CSS</dd>
+                                    <dt data-i18n="about_fact_label_1"></dt>
+                                    <dd data-i18n="about_fact_value_1"></dd>
                                 </div>
                                 <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_2">Current Goal</dt>
-                                    <dd data-i18n="about_fact_value_2">Build a polished multilingual portfolio</dd>
+                                    <dt data-i18n="about_fact_label_2"></dt>
+                                    <dd data-i18n="about_fact_value_2"></dd>
                                 </div>
                                 <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_3">Workflow</dt>
-                                    <dd data-i18n="about_fact_value_3">Implement, review, refine, and document</dd>
+                                    <dt data-i18n="about_fact_label_3"></dt>
+                                    <dd data-i18n="about_fact_value_3"></dd>
                                 </div>
                                 <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_4">Interests</dt>
-                                    <dd data-i18n="about_fact_value_4">Accessible UI, motion, and readable code</dd>
+                                    <dt data-i18n="about_fact_label_4"></dt>
+                                    <dd data-i18n="about_fact_value_4"></dd>
                                 </div>
                             </dl>
                         </section>
@@ -328,28 +353,22 @@
 
         <section class="section" id="skills" aria-labelledby="skills-title">
             <div class="section__inner">
-                <h2 class="section__title" id="skills-title" data-i18n="skills_title">기술 스택</h2>
-                <p class="section__text" data-i18n="skills_text">
-                    프론트엔드 중심으로 다양한 기술을 학습하고 프로젝트에 적용하고 있습니다.
-                </p>
+                <h2 class="section__title" id="skills-title" data-i18n="skills_title"></h2>
+                <p class="section__text" data-i18n="skills_text"></p>
             </div>
         </section>
 
         <section class="section" id="projects" aria-labelledby="projects-title">
             <div class="section__inner">
-                <h2 class="section__title" id="projects-title" data-i18n="projects_title">프로젝트</h2>
-                <p class="section__text" data-i18n="projects_text">
-                    직접 구현하며 배운 내용과 개선 과정을 프로젝트에 담고 있습니다.
-                </p>
+                <h2 class="section__title" id="projects-title" data-i18n="projects_title"></h2>
+                <p class="section__text" data-i18n="projects_text"></p>
             </div>
         </section>
 
         <section class="section" id="contact" aria-labelledby="contact-title">
             <div class="section__inner">
-                <h2 class="section__title" id="contact-title" data-i18n="contact_title">연락하기</h2>
-                <p class="section__text" data-i18n="contact_text">
-                    협업이나 문의가 있다면 언제든지 편하게 연락해주세요.
-                </p>
+                <h2 class="section__title" id="contact-title" data-i18n="contact_title"></h2>
+                <p class="section__text" data-i18n="contact_text"></p>
             </div>
         </section>
     </main>

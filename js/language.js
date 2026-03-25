@@ -1,117 +1,181 @@
-// 언어 전환과 메타데이터 동기화를 관리한다.
-import { DEFAULT_LANGUAGE, I18N, LOCALE_CODES, SITE_TITLE, STORAGE_KEYS } from "./i18n.js";
+// 다국어 상태와 메타데이터, 언어 전환 효과를 한곳에서 관리한다.
+import { DEFAULT_LANGUAGE, SITE_TITLE, STORAGE_KEYS, LOCALE_CODES, I18N } from "./i18n.js";
 
+const SUPPORTED_LANGUAGES = new Set(Object.keys(I18N));
+const LANGUAGE_BUTTON_SELECTOR = ".lang-switch__button[data-lang]";
 const TRANSLATABLE_SELECTOR = "[data-i18n]";
-const LANGUAGE_BUTTON_SELECTOR = ".lang-switch__button";
-const MENU_TOGGLE_SELECTOR = "[data-menu-toggle]";
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const LANGUAGE_TRANSITION_OUT_MS = 110;
+const LANGUAGE_TRANSITION_RESET_MS = 280;
 
-const metaElements = {
-    description: document.querySelector('meta[name="description"]'),
-    ogTitle: document.querySelector('meta[property="og:title"]'),
-    ogDescription: document.querySelector('meta[property="og:description"]'),
-    ogLocale: document.querySelector('meta[property="og:locale"]'),
-    twitterTitle: document.querySelector('meta[name="twitter:title"]'),
-    twitterDescription: document.querySelector('meta[name="twitter:description"]')
-};
+let currentLanguage = DEFAULT_LANGUAGE;
+let isLanguageTransitionRunning = false;
+let reducedMotionMedia = null;
 
-const translatableElements = [...document.querySelectorAll(TRANSLATABLE_SELECTOR)];
-const languageButtons = [...document.querySelectorAll(LANGUAGE_BUTTON_SELECTOR)];
-
-function resolveLanguage(language) {
-    return I18N[language] ? language : DEFAULT_LANGUAGE;
+function isSupportedLanguage(language) {
+    return typeof language === "string" && SUPPORTED_LANGUAGES.has(language);
 }
 
-function readStoredLanguage() {
+function getTranslation(language = currentLanguage) {
+    return I18N[isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE];
+}
+
+function getStoredLanguage() {
     try {
-        return localStorage.getItem(STORAGE_KEYS.language);
+        const storedLanguage = localStorage.getItem(STORAGE_KEYS.language);
+        return isSupportedLanguage(storedLanguage) ? storedLanguage : null;
     } catch {
         return null;
     }
 }
 
-function persistLanguage(language) {
+function storeLanguage(language) {
     try {
         localStorage.setItem(STORAGE_KEYS.language, language);
     } catch {
-        // 저장소를 쓸 수 없는 환경에서는 현재 언어만 유지한다.
+        // 로컬 저장소를 쓸 수 없는 환경은 조용히 무시한다.
     }
 }
 
-// 일부 번역 대상은 텍스트 대신 속성을 갱신한다.
-function applyTranslation(element, value) {
-    const attributeName = element.dataset.i18nAttr;
+function detectSystemLanguage() {
+    const locales = Array.isArray(navigator.languages) && navigator.languages.length > 0
+        ? navigator.languages
+        : [navigator.language || ""];
 
-    if (attributeName) {
-        element.setAttribute(attributeName, value);
-        return;
+    if (locales.some((locale) => String(locale).toLowerCase().startsWith("ko"))) {
+        return "ko";
     }
 
-    element.textContent = value;
+    if (locales.some((locale) => String(locale).toLowerCase().startsWith("ja"))) {
+        return "ja";
+    }
+
+    return "en";
 }
 
-// 현재 언어에 맞춰 문서 메타 정보를 함께 맞춘다.
-function updateMetadata(language, dictionary) {
+function resolveInitialLanguage() {
+    const bootstrappedLanguage = document.documentElement.dataset.language;
+
+    if (isSupportedLanguage(bootstrappedLanguage)) {
+        return bootstrappedLanguage;
+    }
+
+    return getStoredLanguage() ?? detectSystemLanguage();
+}
+
+function setMetaContent(selector, value) {
+    const element = document.querySelector(selector);
+
+    if (element && typeof value === "string") {
+        element.setAttribute("content", value);
+    }
+}
+
+function applyTranslations(language) {
+    const translation = getTranslation(language);
+
+    document.documentElement.lang = language;
+    document.documentElement.dataset.language = language;
+
     document.title = SITE_TITLE;
+    setMetaContent('meta[name="description"]', translation.meta_description);
+    setMetaContent('meta[property="og:title"]', SITE_TITLE);
+    setMetaContent('meta[property="og:description"]', translation.meta_description);
+    setMetaContent('meta[property="og:locale"]', LOCALE_CODES[language] ?? LOCALE_CODES[DEFAULT_LANGUAGE]);
+    setMetaContent('meta[name="twitter:title"]', SITE_TITLE);
+    setMetaContent('meta[name="twitter:description"]', translation.meta_description);
 
-    metaElements.description?.setAttribute("content", dictionary.meta_description);
-    metaElements.ogTitle?.setAttribute("content", SITE_TITLE);
-    metaElements.ogDescription?.setAttribute("content", dictionary.meta_description);
-    metaElements.ogLocale?.setAttribute("content", LOCALE_CODES[language] ?? LOCALE_CODES[DEFAULT_LANGUAGE]);
-    metaElements.twitterTitle?.setAttribute("content", SITE_TITLE);
-    metaElements.twitterDescription?.setAttribute("content", dictionary.meta_description);
+    document.querySelectorAll(TRANSLATABLE_SELECTOR).forEach((element) => {
+        const key = element.dataset.i18n;
+        const value = translation[key];
+
+        if (typeof value !== "string") {
+            return;
+        }
+
+        const attribute = element.dataset.i18nAttr;
+
+        if (attribute) {
+            element.setAttribute(attribute, value);
+            return;
+        }
+
+        element.textContent = value;
+    });
+
+    currentLanguage = language;
+    updateLanguageButtons(language);
+    updateMenuButtonLabel(undefined, language);
 }
 
 function updateLanguageButtons(language) {
-    languageButtons.forEach((button) => {
+    document.querySelectorAll(LANGUAGE_BUTTON_SELECTOR).forEach((button) => {
         const isActive = button.dataset.lang === language;
         button.classList.toggle("is-active", isActive);
         button.setAttribute("aria-pressed", String(isActive));
     });
 }
 
-export function updateMenuButtonLabel(isMenuOpen) {
-    const menuToggle = document.querySelector(MENU_TOGGLE_SELECTOR);
+function setLanguage(language, { persist = true } = {}) {
+    const nextLanguage = isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE;
+
+    applyTranslations(nextLanguage);
+
+    if (persist) {
+        storeLanguage(nextLanguage);
+    }
+}
+
+function changeLanguageWithTransition(language) {
+    if (language === currentLanguage) {
+        return;
+    }
+
+    if (reducedMotionMedia?.matches || isLanguageTransitionRunning) {
+        setLanguage(language);
+        return;
+    }
+
+    isLanguageTransitionRunning = true;
+    document.body.classList.add("is-language-changing");
+
+    window.setTimeout(() => {
+        setLanguage(language);
+
+        window.requestAnimationFrame(() => {
+            document.body.classList.remove("is-language-changing");
+        });
+
+        window.setTimeout(() => {
+            isLanguageTransitionRunning = false;
+        }, LANGUAGE_TRANSITION_RESET_MS);
+    }, LANGUAGE_TRANSITION_OUT_MS);
+}
+
+export function updateMenuButtonLabel(isOpen = false, language = currentLanguage) {
+    const menuToggle = document.getElementById("menuToggle");
 
     if (!menuToggle) {
         return;
     }
 
-    const language = resolveLanguage(document.documentElement.lang);
-    const dictionary = I18N[language];
-
-    menuToggle.setAttribute(
-        "aria-label",
-        isMenuOpen ? dictionary.menu_close_label : dictionary.menu_open_label
-    );
-}
-
-export function setLanguage(nextLanguage) {
-    const language = resolveLanguage(nextLanguage);
-    const dictionary = I18N[language];
-
-    document.documentElement.lang = language;
-
-    translatableElements.forEach((element) => {
-        const key = element.dataset.i18n;
-        const value = dictionary[key];
-
-        if (value) {
-            applyTranslation(element, value);
-        }
-    });
-
-    updateMetadata(language, dictionary);
-    updateLanguageButtons(language);
-    updateMenuButtonLabel(document.querySelector(MENU_TOGGLE_SELECTOR)?.getAttribute("aria-expanded") === "true");
-    persistLanguage(language);
+    const translation = getTranslation(language);
+    menuToggle.setAttribute("aria-label", isOpen ? translation.menu_close_label : translation.menu_open_label);
 }
 
 export function initializeLanguageSwitcher() {
-    languageButtons.forEach((button) => {
+    reducedMotionMedia = window.matchMedia(REDUCED_MOTION_QUERY);
+
+    const initialLanguage = resolveInitialLanguage();
+    setLanguage(initialLanguage, { persist: false });
+
+    document.querySelectorAll(LANGUAGE_BUTTON_SELECTOR).forEach((button) => {
         button.addEventListener("click", () => {
-            setLanguage(button.dataset.lang);
+            const nextLanguage = button.dataset.lang;
+
+            if (isSupportedLanguage(nextLanguage)) {
+                changeLanguageWithTransition(nextLanguage);
+            }
         });
     });
-
-    setLanguage(readStoredLanguage() ?? DEFAULT_LANGUAGE);
 }

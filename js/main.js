@@ -3,10 +3,26 @@ import { initializeBackgroundMotion } from "./background.js";
 import { initializeHeader } from "./header.js";
 import { initializeLanguageSwitcher } from "./language.js";
 
+function finishInitialLoad() {
+    const loadingScreen = document.getElementById("loadingScreen");
+
+    window.requestAnimationFrame(() => {
+        document.documentElement.classList.remove("is-loading");
+
+        if (loadingScreen) {
+            loadingScreen.setAttribute("aria-hidden", "true");
+        }
+    });
+}
+
 function initializePortfolio() {
-    initializeBackgroundMotion();
-    initializeHeader();
-    initializeLanguageSwitcher();
+    try {
+        initializeBackgroundMotion();
+        initializeHeader();
+        initializeLanguageSwitcher();
+    } finally {
+        finishInitialLoad();
+    }
 }
 
 if (document.readyState === "loading") {
