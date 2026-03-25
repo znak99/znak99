@@ -38,9 +38,9 @@
     --orb-opacity: 0.17;
     --orb-mobile-opacity: 0.11;
     --section-padding-inline: 24px;
-    --section-padding-block-start: 120px;
-    --section-padding-block-end: 80px;
-    --section-panel-padding: 48px;
+    --section-padding-block-start: 96px;
+    --section-padding-block-end: 56px;
+    --section-panel-padding: 40px;
     --section-text-max-width: 720px;
     --transition-fast: 0.25s ease;
     --transition-normal: 0.35s ease;
@@ -206,9 +206,9 @@ button:focus-visible {
     :root {
         --header-height: 80px;
         --section-padding-inline: 20px;
-        --section-padding-block-start: 110px;
-        --section-padding-block-end: 72px;
-        --section-panel-padding: 40px;
+        --section-padding-block-start: 88px;
+        --section-padding-block-end: 52px;
+        --section-panel-padding: 34px;
     }
 }
 
@@ -217,9 +217,9 @@ button:focus-visible {
         --header-height: 76px;
         --orb-blur: 82px;
         --section-padding-inline: 16px;
-        --section-padding-block-start: 100px;
-        --section-padding-block-end: 56px;
-        --section-panel-padding: 28px;
+        --section-padding-block-start: 82px;
+        --section-padding-block-end: 44px;
+        --section-panel-padding: 24px;
     }
 
     .bg-orb {

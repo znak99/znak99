@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/header-controls.css">
     <link rel="stylesheet" href="css/overview.css">
+    <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/language-transition.css">
 
     <script type="module" src="js/main.js"></script>
@@ -268,12 +269,92 @@
             </div>
         </section>
 
-        <section class="section" id="about" aria-labelledby="about-title">
-            <div class="section__inner">
-                <h2 class="section__title" id="about-title" data-i18n="about_title">저를 소개합니다.</h2>
-                <p class="section__text" data-i18n="about_text">
-                    문제를 구조적으로 바라보고, 보기 좋은 화면과 읽기 좋은 코드를 함께 만들고 싶습니다.
-                </p>
+        <!-- About Me -->
+        <section class="section section--about" id="about" aria-labelledby="about-title">
+            <div class="section__inner about">
+                <div class="about__top">
+                    <aside class="about__profile" aria-labelledby="about-profile-title">
+                        <div class="about__avatar" aria-hidden="true">HS</div>
+                        <div class="about__profile-copy">
+                            <p class="about__profile-label" data-i18n="about_profile_label">PROFILE SNAPSHOT</p>
+                            <h3 class="about__profile-title" id="about-profile-title" data-i18n="about_profile_name">
+                                Hong Seungwoo
+                            </h3>
+                            <p class="about__profile-role" data-i18n="about_profile_role">
+                                Frontend Developer in Progress
+                            </p>
+                            <p class="about__profile-status" data-i18n="about_profile_status">
+                                Building a multilingual portfolio with responsive UI and clear interaction.
+                            </p>
+                        </div>
+
+                        <ul
+                            class="about__profile-tags"
+                            aria-label="Profile keywords"
+                            role="list"
+                            data-i18n="about_profile_tags_label"
+                            data-i18n-attr="aria-label"
+                        >
+                            <li data-i18n="about_tag_1">UI Structure</li>
+                            <li data-i18n="about_tag_2">Responsive Layout</li>
+                            <li data-i18n="about_tag_3">i18n Flow</li>
+                            <li data-i18n="about_tag_4">Semantic Markup</li>
+                        </ul>
+                    </aside>
+
+                    <div class="about__heading">
+                        <p class="section__eyebrow" data-i18n="about_eyebrow">ABOUT ME</p>
+                        <h2 class="section__title about__title" id="about-title" data-i18n="about_title">
+                            기초를 다지면서 화면의 완성도를 함께 끌어올리고 있습니다.
+                        </h2>
+                        <p class="section__text about__lead" data-i18n="about_intro">
+                            프론트엔드의 기본을 단단히 이해하고, 언어 전환과 반응형 흐름까지 자연스럽게 연결하는 화면을 만들고 있습니다.
+                        </p>
+                        <p class="about__note" data-i18n="about_note">
+                            현재 프로필 정보와 타임라인은 레이아웃 검토를 위한 더미 데이터입니다. 이후 실제 이력과 학습 흐름에 맞춰 교체할 예정입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="about__content">
+                    <article class="about__story" aria-labelledby="about-story-title">
+                        <h3 class="about__subheading" id="about-story-title" data-i18n="about_story_title">
+                            HOW I WORK
+                        </h3>
+                        <p data-i18n="about_story_text_1">
+                            저는 화면을 만들 때 먼저 정보의 우선순위와 사용자 흐름을 정리한 뒤, 시각 요소와 상호작용을 쌓아가는 방식을 선호합니다.
+                        </p>
+                        <p data-i18n="about_story_text_2">
+                            특히 HTML, CSS, JavaScript의 기본기를 바탕으로 반응형 구조와 다국어 전환이 자연스럽게 이어지는 경험을 만드는 데 관심이 있습니다.
+                        </p>
+                    </article>
+
+                    <div class="about__rail">
+                        <section class="about__facts" aria-labelledby="about-facts-title">
+                            <h3 class="about__subheading" id="about-facts-title" data-i18n="about_facts_title">
+                                PROFILE NOTES
+                            </h3>
+                            <dl class="about__facts-list">
+                                <div class="about__facts-item">
+                                    <dt data-i18n="about_fact_label_1">Focus</dt>
+                                    <dd data-i18n="about_fact_value_1">Semantic HTML and scalable CSS</dd>
+                                </div>
+                                <div class="about__facts-item">
+                                    <dt data-i18n="about_fact_label_2">Current Goal</dt>
+                                    <dd data-i18n="about_fact_value_2">Build a polished multilingual portfolio</dd>
+                                </div>
+                                <div class="about__facts-item">
+                                    <dt data-i18n="about_fact_label_3">Workflow</dt>
+                                    <dd data-i18n="about_fact_value_3">Implement, review, refine, and document</dd>
+                                </div>
+                                <div class="about__facts-item">
+                                    <dt data-i18n="about_fact_label_4">Interests</dt>
+                                    <dd data-i18n="about_fact_value_4">Accessible UI, motion, and readable code</dd>
+                                </div>
+                            </dl>
+                        </section>
+                    </div>
+                </div>
             </div>
         </section>
 
