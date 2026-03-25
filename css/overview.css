@@ -330,3 +330,57 @@
         transition: none;
     }
 }
+
+/* Resize stability
+   The hero title is large enough that browser re-balancing can sometimes keep
+   overly narrow line breaks after repeated viewport resizes. Keep the title
+   layout more deterministic for the overview section. */
+.section--overview {
+    align-items: flex-start;
+}
+
+.overview__intro {
+    align-items: start;
+}
+
+.overview__copy {
+    min-width: 0;
+}
+
+.overview__title {
+    max-width: min(18ch, 100%);
+    font-size: clamp(2.6rem, 4.4vw, 4.8rem);
+    text-wrap: pretty;
+    word-break: keep-all;
+}
+
+.overview__lead,
+.overview__support {
+    max-width: min(60ch, 100%);
+}
+
+@media (min-width: 1101px) {
+    .overview__intro {
+        grid-template-columns: minmax(0, 1.9fr) minmax(320px, 0.78fr);
+    }
+}
+
+/* Language-specific wrapping
+   The resize-stability rule uses keep-all for Korean/English titles, but that
+   is too strict for Japanese and can prevent natural CJK line breaks. */
+html[lang="ja"] .overview__title {
+    max-width: min(15ch, 100%);
+    font-size: clamp(2.35rem, 4vw, 4.35rem);
+    word-break: normal;
+    line-break: strict;
+    overflow-wrap: anywhere;
+    text-wrap: pretty;
+}
+
+html[lang="ja"] .overview__lead,
+html[lang="ja"] .overview__support,
+html[lang="ja"] .overview__panel-title,
+html[lang="ja"] .overview__panel-item dd {
+    line-break: strict;
+    word-break: normal;
+}
