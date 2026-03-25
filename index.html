@@ -72,10 +72,14 @@
     <link rel="stylesheet" href="css/overview.css">
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/skills.css">
+    <link rel="stylesheet" href="css/projects.css">
     <link rel="stylesheet" href="css/language-transition.css">
 
-    <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/skills-visibility-fix.js"></script>
+    <script type="module">
+        import("./js/projects-i18n.js")
+            .then(() => import("./js/main.js"))
+            .then(() => import("./js/skills-visibility-fix.js"));
+    </script>
 </head>
 <body>
     <div class="loading-screen" id="loadingScreen" role="status" aria-live="polite">
@@ -498,10 +502,112 @@
             </div>
         </section>
 
-        <section class="section" id="projects" aria-labelledby="projects-title">
-            <div class="section__inner">
-                <h2 class="section__title" id="projects-title" data-i18n="projects_title"></h2>
-                <p class="section__text" data-i18n="projects_text"></p>
+        <section class="section section--projects" id="projects" aria-labelledby="projects-title">
+            <div class="section__inner projects">
+                <div class="projects__heading">
+                    <p class="section__eyebrow" data-i18n="projects_eyebrow"></p>
+                    <h2 class="section__title projects__title" id="projects-title" data-i18n="projects_title"></h2>
+                    <p class="section__text projects__lead" data-i18n="projects_text"></p>
+                </div>
+
+                <article class="projects__featured" aria-labelledby="projects-featured-title">
+                    <div class="projects__featured-copy">
+                        <p class="projects__featured-label" data-i18n="projects_featured_label"></p>
+                        <h3
+                            class="projects__featured-title"
+                            id="projects-featured-title"
+                            data-i18n="projects_featured_title"
+                        ></h3>
+                        <p class="projects__featured-text" data-i18n="projects_featured_text"></p>
+
+                        <dl class="projects__featured-meta">
+                            <div class="projects__featured-meta-item">
+                                <dt data-i18n="projects_featured_meta_label_1"></dt>
+                                <dd data-i18n="projects_featured_meta_value_1"></dd>
+                            </div>
+                            <div class="projects__featured-meta-item">
+                                <dt data-i18n="projects_featured_meta_label_2"></dt>
+                                <dd data-i18n="projects_featured_meta_value_2"></dd>
+                            </div>
+                            <div class="projects__featured-meta-item">
+                                <dt data-i18n="projects_featured_meta_label_3"></dt>
+                                <dd data-i18n="projects_featured_meta_value_3"></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="projects__featured-panel" aria-hidden="true">
+                        <div class="projects__featured-panel-grid"></div>
+                        <div class="projects__featured-panel-card">
+                            <span data-i18n="projects_featured_stage_label"></span>
+                            <strong data-i18n="projects_featured_stage_value"></strong>
+                        </div>
+                        <div class="projects__featured-panel-line projects__featured-panel-line--1"></div>
+                        <div class="projects__featured-panel-line projects__featured-panel-line--2"></div>
+                        <span class="projects__featured-dot projects__featured-dot--1"></span>
+                        <span class="projects__featured-dot projects__featured-dot--2"></span>
+                        <span class="projects__featured-dot projects__featured-dot--3"></span>
+                    </div>
+                </article>
+
+                <div class="projects__grid">
+                    <article class="projects__card" aria-labelledby="projects-card-title-1">
+                        <header class="projects__card-head">
+                            <p class="projects__card-label" data-i18n="projects_card_label_1"></p>
+                            <h3
+                                class="projects__card-title"
+                                id="projects-card-title-1"
+                                data-i18n="projects_card_title_1"
+                            ></h3>
+                        </header>
+                        <p class="projects__card-text" data-i18n="projects_card_text_1"></p>
+                        <ul class="projects__tags" role="list" aria-label="Project stack">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>Responsive UI</li>
+                            <li>A11y</li>
+                        </ul>
+                        <p class="projects__card-note" data-i18n="projects_card_note_1"></p>
+                    </article>
+
+                    <article class="projects__card" aria-labelledby="projects-card-title-2">
+                        <header class="projects__card-head">
+                            <p class="projects__card-label" data-i18n="projects_card_label_2"></p>
+                            <h3
+                                class="projects__card-title"
+                                id="projects-card-title-2"
+                                data-i18n="projects_card_title_2"
+                            ></h3>
+                        </header>
+                        <p class="projects__card-text" data-i18n="projects_card_text_2"></p>
+                        <ul class="projects__tags" role="list" aria-label="Project stack">
+                            <li>JavaScript</li>
+                            <li>i18n</li>
+                            <li>DOM</li>
+                            <li>State Flow</li>
+                        </ul>
+                        <p class="projects__card-note" data-i18n="projects_card_note_2"></p>
+                    </article>
+
+                    <article class="projects__card" aria-labelledby="projects-card-title-3">
+                        <header class="projects__card-head">
+                            <p class="projects__card-label" data-i18n="projects_card_label_3"></p>
+                            <h3
+                                class="projects__card-title"
+                                id="projects-card-title-3"
+                                data-i18n="projects_card_title_3"
+                            ></h3>
+                        </header>
+                        <p class="projects__card-text" data-i18n="projects_card_text_3"></p>
+                        <ul class="projects__tags" role="list" aria-label="Project stack">
+                            <li>Motion</li>
+                            <li>Glass UI</li>
+                            <li>Interaction</li>
+                            <li>Polish</li>
+                        </ul>
+                        <p class="projects__card-note" data-i18n="projects_card_note_3"></p>
+                    </article>
+                </div>
             </div>
         </section>
 
