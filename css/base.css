@@ -1,53 +1,70 @@
-/* 기본 리셋 */
-* {
+/* Reset */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* 전역 변수 */
+/* Theme tokens */
 :root {
+    color-scheme: dark;
+
     --color-bg: #07090f;
     --color-bg-deep: #03050a;
     --color-text: #f5f7fb;
     --color-text-muted: #9ea7bb;
-    --color-border: rgba(255, 255, 255, 0.1);
-    --color-glass: rgba(255, 255, 255, 0.06);
-    --color-glass-strong: rgba(255, 255, 255, 0.1);
-
+    --color-border: rgb(255 255 255 / 0.1);
+    --color-surface: rgb(255 255 255 / 0.04);
+    --color-surface-strong: rgb(8 12 20 / 0.84);
+    --color-glass: rgb(255 255 255 / 0.06);
+    --color-glass-strong: rgb(255 255 255 / 0.1);
+    --color-header-surface: rgb(5 8 14 / 0.72);
     --color-accent: #4ade80;
-    --color-accent-soft: rgba(74, 222, 128, 0.18);
-
-    --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.28);
-    --radius-sm: 14px;
-    --radius-md: 20px;
+    --color-accent-strong: #22c55e;
+    --color-accent-contrast: #02140a;
+    --color-accent-rgb: 74 222 128;
+    --shadow-soft: 0 12px 40px rgb(0 0 0 / 0.28);
+    --shadow-focus: 0 0 0 3px rgb(var(--color-accent-rgb) / 0.35);
     --radius-lg: 28px;
     --radius-pill: 999px;
     --header-height: 84px;
     --container-width: 1200px;
+    --glass-blur-xs: 8px;
+    --glass-blur-sm: 14px;
+    --glass-blur-md: 18px;
+    --orb-blur: 98px;
+    --orb-opacity: 0.17;
+    --orb-mobile-opacity: 0.11;
+    --section-padding-inline: 24px;
+    --section-padding-block-start: 120px;
+    --section-padding-block-end: 80px;
+    --section-panel-padding: 48px;
+    --section-text-max-width: 720px;
     --transition-fast: 0.25s ease;
     --transition-normal: 0.35s ease;
 }
 
-/* 스크롤 동작 */
+/* Document */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + 24px);
 }
 
-/* 기본 body 스타일 */
 body {
     min-height: 100vh;
-    font-family: "Pretendard", "Noto Sans KR", "Noto Sans JP", "Segoe UI", Arial, sans-serif;
-    color: var(--color-text);
-    background:
-        radial-gradient(circle at top, rgba(110, 231, 255, 0.05), transparent 30%),
-        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
+    position: relative;
     overflow-x: hidden;
     padding-top: var(--header-height);
-    position: relative;
+    font-family: "Pretendard", "Noto Sans KR", "Noto Sans JP", "Segoe UI", Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--color-text);
+    background:
+        radial-gradient(circle at top, rgb(110 231 255 / 0.05), transparent 30%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
 }
 
-/* 기본 요소 스타일 */
 a {
     color: inherit;
     text-decoration: none;
@@ -58,6 +75,7 @@ input,
 textarea,
 select {
     font: inherit;
+    color: inherit;
 }
 
 button {
@@ -71,57 +89,93 @@ main {
     z-index: 1;
 }
 
-/* 배경 오브 */
+a:focus-visible,
+button:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+}
+
+/* Accessibility */
+.skip-link {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    z-index: 1200;
+    padding: 12px 18px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-size: 0.95rem;
+    font-weight: 700;
+    transform: translate(-50%, -160%);
+    transition: transform var(--transition-fast);
+}
+
+.skip-link:focus-visible {
+    transform: translate(-50%, 0);
+}
+
+/* Decorative background */
 .bg-orb {
     position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    filter: blur(90px);
-    opacity: 0.22;
     z-index: 0;
-    background: var(--color-accent);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at center,
+        rgb(var(--color-accent-rgb) / 0.62) 0%,
+        rgb(var(--color-accent-rgb) / 0.28) 42%,
+        rgb(var(--color-accent-rgb) / 0.08) 68%,
+        rgb(var(--color-accent-rgb) / 0) 100%
+    );
+    pointer-events: none;
+    opacity: var(--orb-opacity);
+    filter: blur(var(--orb-blur));
+    will-change: transform;
 }
 
 .orb-1 {
-    top: 80px;
-    left: -80px;
+    top: 12vh;
+    left: 6vw;
     width: 320px;
     height: 320px;
 }
 
 .orb-2 {
-    top: 35%;
-    right: -120px;
+    top: 30vh;
+    left: calc(100vw - 420px - 8vw);
     width: 420px;
     height: 420px;
 }
 
 .orb-3 {
-    bottom: -80px;
-    left: 30%;
+    top: calc(100vh - 300px - 10vh);
+    left: 28vw;
     width: 300px;
     height: 300px;
 }
 
-/* 임시 섹션 */
+/* Section layout */
 .section {
-    min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 24px 80px;
+    min-height: 100vh;
+    padding:
+        var(--section-padding-block-start)
+        var(--section-padding-inline)
+        var(--section-padding-block-end);
 }
 
 .section__inner {
     width: 100%;
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 48px;
+    padding: var(--section-panel-padding);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: var(--color-surface);
     box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
 }
 
 .section__eyebrow {
@@ -133,64 +187,81 @@ main {
 }
 
 .section__title {
+    margin-bottom: 18px;
     font-size: clamp(2rem, 4vw, 4rem);
     line-height: 1.1;
-    margin-bottom: 18px;
+    text-wrap: balance;
 }
 
 .section__text {
-    max-width: 720px;
+    max-width: var(--section-text-max-width);
     color: var(--color-text-muted);
     font-size: clamp(1rem, 1.5vw, 1.125rem);
     line-height: 1.8;
+    text-wrap: pretty;
 }
 
-/* 태블릿 대응 */
+/* Responsive */
 @media (max-width: 1024px) {
     :root {
         --header-height: 80px;
-    }
-
-    .section {
-        padding: 110px 20px 72px;
-    }
-
-    .section__inner {
-        padding: 40px;
+        --section-padding-inline: 20px;
+        --section-padding-block-start: 110px;
+        --section-padding-block-end: 72px;
+        --section-panel-padding: 40px;
     }
 }
 
-/* 모바일 대응 */
 @media (max-width: 768px) {
     :root {
         --header-height: 76px;
+        --orb-blur: 82px;
+        --section-padding-inline: 16px;
+        --section-padding-block-start: 100px;
+        --section-padding-block-end: 56px;
+        --section-panel-padding: 28px;
     }
 
     .bg-orb {
-        filter: blur(72px);
-        opacity: 0.18;
+        opacity: var(--orb-mobile-opacity);
     }
 
-    .section {
-        padding: 100px 16px 56px;
+    .orb-1 {
+        top: 14vh;
+        left: -24px;
+        width: 220px;
+        height: 220px;
     }
 
+    .orb-2 {
+        top: 38vh;
+        left: calc(100vw - 300px - 20px);
+        width: 300px;
+        height: 300px;
+    }
+
+    .orb-3 {
+        top: calc(100vh - 220px - 12vh);
+        left: 20vw;
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
     .section__inner {
-        padding: 28px;
+        padding: 24px 20px;
         border-radius: 24px;
     }
 }
 
-/* 작은 모바일 대응 */
-@media (max-width: 480px) {
-    .section__inner {
-        padding: 24px 20px;
-    }
-}
-
-/* 모션 최소화 대응 */
+/* Motion accessibility */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
+    }
+
+    .bg-orb {
+        transform: none !important;
     }
 }

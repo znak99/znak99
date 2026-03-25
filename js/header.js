@@ -1,146 +1,196 @@
-document.addEventListener("DOMContentLoaded", () => {
+// 헤더 상호작용과 현재 섹션 강조를 관리한다.
+import { updateMenuButtonLabel } from "./language.js";
+
+const HEADER_SCROLL_THRESHOLD = 20;
+const DESKTOP_MEDIA_QUERY = "(min-width: 769px)";
+const MANUAL_SCROLL_INTENT_WINDOW_MS = 900;
+const ACTIVE_SECTION_OPTIONS = {
+    rootMargin: "-35% 0px -45% 0px",
+    threshold: [0.2, 0.45, 0.7]
+};
+const SCROLL_TRIGGER_KEYS = new Set([
+    "ArrowDown",
+    "ArrowUp",
+    "PageDown",
+    "PageUp",
+    "Home",
+    "End",
+    " ",
+    "Spacebar"
+]);
+
+function isInteractiveElement(target) {
+    return target instanceof HTMLElement
+        && (
+            target.isContentEditable
+            || target.closest("input, textarea, select, button, a, summary")
+        );
+}
+
+export function initializeHeader() {
     const header = document.getElementById("header");
     const menuToggle = document.getElementById("menuToggle");
     const mobileMenu = document.getElementById("mobileMenu");
+    const sections = [...document.querySelectorAll("main section[id]")];
+    const allNavLinks = [
+        ...document.querySelectorAll(".nav__link"),
+        ...document.querySelectorAll(".mobile-menu__link")
+    ];
 
-    const desktopNavLinks = document.querySelectorAll(".nav__link");
-    const mobileNavLinks = document.querySelectorAll(".mobile-menu__link");
-    const allNavLinks = [...desktopNavLinks, ...mobileNavLinks];
+    if (!header || !menuToggle || !mobileMenu || sections.length === 0) {
+        return;
+    }
 
-    const langButtons = document.querySelectorAll(".lang-switch__button");
-    const translatableElements = document.querySelectorAll("[data-i18n]");
-    const sections = document.querySelectorAll("section[id]");
+    const desktopMediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
+    const visibleSections = new Map();
+    let hasPlayedInitialScrollSweep = false;
+    let manualScrollIntentUntil = 0;
 
-    /* 언어 적용 */
-    function setLanguage(lang) {
-        const dictionary = window.I18N?.[lang];
+    const markManualScrollIntent = (duration = MANUAL_SCROLL_INTENT_WINDOW_MS) => {
+        manualScrollIntentUntil = performance.now() + duration;
+    };
 
-        if (!dictionary) {
-            return;
+    // 메뉴 패널과 버튼 상태를 한곳에서 맞춘다.
+    const setMenuState = (isOpen) => {
+        mobileMenu.classList.toggle("is-open", isOpen);
+        menuToggle.classList.toggle("is-active", isOpen);
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+
+        if ("inert" in mobileMenu) {
+            mobileMenu.inert = !isOpen;
         }
 
-        document.documentElement.lang = lang;
+        updateMenuButtonLabel(isOpen);
+    };
 
-        translatableElements.forEach((element) => {
-            const key = element.dataset.i18n;
+    const updateHeaderState = () => {
+        header.classList.toggle("is-scrolled", window.scrollY > HEADER_SCROLL_THRESHOLD);
 
-            if (dictionary[key]) {
-                element.textContent = dictionary[key];
-            }
-        });
-
-        langButtons.forEach((button) => {
-            button.classList.toggle("is-active", button.dataset.lang === lang);
-        });
-
-        localStorage.setItem("language", lang);
-    }
-
-    /* 저장된 언어 불러오기 */
-    function loadSavedLanguage() {
-        const savedLanguage = localStorage.getItem("language") || "ko";
-        setLanguage(savedLanguage);
-    }
-
-    /* 스크롤에 따른 헤더 상태 변경 */
-    function updateHeaderState() {
-        if (window.scrollY > 20) {
-            header.classList.add("is-scrolled");
-        } else {
-            header.classList.remove("is-scrolled");
+        // 최초 수동 스크롤 입력 직후의 실제 스크롤에서만 스윕을 실행한다.
+        if (
+            !hasPlayedInitialScrollSweep &&
+            window.scrollY > HEADER_SCROLL_THRESHOLD &&
+            performance.now() <= manualScrollIntentUntil
+        ) {
+            header.classList.add("has-scroll-sweep");
+            hasPlayedInitialScrollSweep = true;
         }
-    }
+    };
 
-    /* 모바일 메뉴 열기 */
-    function openMobileMenu() {
-        mobileMenu.classList.add("is-open");
-        menuToggle.classList.add("is-active");
-        menuToggle.setAttribute("aria-expanded", "true");
-        mobileMenu.setAttribute("aria-hidden", "false");
-    }
-
-    /* 모바일 메뉴 닫기 */
-    function closeMobileMenu() {
-        mobileMenu.classList.remove("is-open");
-        menuToggle.classList.remove("is-active");
-        menuToggle.setAttribute("aria-expanded", "false");
-        mobileMenu.setAttribute("aria-hidden", "true");
-    }
-
-    /* 모바일 메뉴 토글 */
-    function toggleMobileMenu() {
-        if (mobileMenu.classList.contains("is-open")) {
-            closeMobileMenu();
-        } else {
-            openMobileMenu();
-        }
-    }
-
-    /* 현재 섹션에 맞는 메뉴 활성화 */
-    function updateActiveLink() {
-        let currentId = "";
-
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop - 140;
-            const sectionBottom = sectionTop + section.offsetHeight;
-
-            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                currentId = section.id;
-            }
-        });
-
+    const updateActiveLinks = (currentId) => {
         allNavLinks.forEach((link) => {
             const isActive = link.getAttribute("href") === `#${currentId}`;
             link.classList.toggle("is-active", isActive);
-        });
-    }
 
-    /* 언어 버튼 클릭 처리 */
-    langButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            setLanguage(button.dataset.lang);
+            if (isActive) {
+                link.setAttribute("aria-current", "page");
+            } else {
+                link.removeAttribute("aria-current");
+            }
         });
+    };
+
+    // 가장 크게 보이는 섹션을 현재 위치로 간주한다.
+    const resolveActiveSection = () => {
+        const currentSection = [...visibleSections.entries()]
+            .sort(([, previousRatio], [, nextRatio]) => nextRatio - previousRatio)[0]?.[0];
+
+        if (currentSection) {
+            updateActiveLinks(currentSection);
+        }
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                visibleSections.set(entry.target.id, entry.intersectionRatio);
+            } else {
+                visibleSections.delete(entry.target.id);
+            }
+        });
+
+        resolveActiveSection();
+    }, ACTIVE_SECTION_OPTIONS);
+
+    sections.forEach((section) => {
+        sectionObserver.observe(section);
     });
 
-    /* 햄버거 버튼 클릭 처리 */
-    menuToggle.addEventListener("click", toggleMobileMenu);
+    const closeMobileMenu = () => setMenuState(false);
 
-    /* 모바일 메뉴 링크 클릭 시 닫기 */
-    mobileNavLinks.forEach((link) => {
+    menuToggle.addEventListener("click", () => {
+        setMenuState(!mobileMenu.classList.contains("is-open"));
+    });
+
+    document.querySelectorAll(".mobile-menu__link").forEach((link) => {
         link.addEventListener("click", closeMobileMenu);
     });
 
-    /* 메뉴 바깥 클릭 시 닫기 */
+    // 휠 입력은 가장 명확한 수동 스크롤 의도이므로 짧게 허용 창을 연다.
+    window.addEventListener("wheel", (event) => {
+        if (event.isTrusted) {
+            markManualScrollIntent();
+        }
+    }, { passive: true });
+
+    // 터치 스크롤도 동일하게 수동 스크롤 의도로 본다.
+    window.addEventListener("touchmove", (event) => {
+        if (event.isTrusted) {
+            markManualScrollIntent();
+        }
+    }, { passive: true });
+
+    document.addEventListener("keydown", (event) => {
+        if (
+            event.isTrusted &&
+            !event.altKey &&
+            !event.ctrlKey &&
+            !event.metaKey &&
+            SCROLL_TRIGGER_KEYS.has(event.key) &&
+            !isInteractiveElement(event.target)
+        ) {
+            markManualScrollIntent(1200);
+        }
+    });
+
     document.addEventListener("click", (event) => {
-        const clickedInsideMenu = mobileMenu.contains(event.target);
-        const clickedMenuButton = menuToggle.contains(event.target);
+        const target = event.target;
+
+        if (!(target instanceof Node)) {
+            return;
+        }
+
+        const clickedInsideMenu = mobileMenu.contains(target);
+        const clickedMenuButton = menuToggle.contains(target);
 
         if (!clickedInsideMenu && !clickedMenuButton) {
             closeMobileMenu();
         }
     });
 
-    /* ESC 입력 시 메뉴 닫기 */
     document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
+        if (event.key === "Escape" && mobileMenu.classList.contains("is-open")) {
             closeMobileMenu();
+            menuToggle.focus();
         }
     });
 
-    /* 스크롤 이벤트 처리 */
-    window.addEventListener("scroll", () => {
-        updateHeaderState();
-        updateActiveLink();
-    });
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
 
-    /* 화면 확장 시 모바일 메뉴 초기화 */
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 768) {
+    const handleDesktopLayoutChange = (event) => {
+        if (event.matches) {
             closeMobileMenu();
         }
-    });
+    };
 
-    loadSavedLanguage();
+    if (typeof desktopMediaQuery.addEventListener === "function") {
+        desktopMediaQuery.addEventListener("change", handleDesktopLayoutChange);
+    } else {
+        desktopMediaQuery.addListener(handleDesktopLayoutChange);
+    }
+
+    setMenuState(false);
     updateHeaderState();
-    updateActiveLink();
-});
+    updateActiveLinks(sections[0].id);
+}

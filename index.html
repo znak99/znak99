@@ -2,25 +2,57 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seungwoo's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hong Seungwoo | Frontend Developer Portfolio</title>
+    <meta
+        name="description"
+        content="프론트엔드 개발과 사용자 경험에 집중하는 홍승우의 포트폴리오 웹페이지입니다. 스킬, 프로젝트, 그리고 개발 방향성을 소개합니다."
+    >
+    <meta name="author" content="Hong Seungwoo">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#07090f">
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Hong Seungwoo Portfolio">
+    <meta property="og:title" content="Hong Seungwoo | Frontend Developer Portfolio">
+    <meta
+        property="og:description"
+        content="사용자 경험과 완성도를 함께 고민하는 개발자 홍승우의 포트폴리오입니다."
+    >
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Hong Seungwoo | Frontend Developer Portfolio">
+    <meta
+        name="twitter:description"
+        content="프론트엔드 개발과 사용자 경험에 집중하는 홍승우의 포트폴리오 웹페이지입니다."
+    >
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/header-controls.css">
 
-    <script src="js/i18n.js" defer></script>
-    <script src="js/header.js" defer></script>
+    <script type="module" src="js/main.js"></script>
 </head>
 <body>
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-    <div class="bg-orb orb-3"></div>
+    <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Skip to content</a>
 
+    <!-- Background decoration -->
+    <div class="bg-orb orb-1" aria-hidden="true"></div>
+    <div class="bg-orb orb-2" aria-hidden="true"></div>
+    <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+    <!-- Site header -->
     <header class="header" id="header">
         <div class="header__inner">
-            <div class="logo" aria-label="Portfolio logo">
+            <a
+                class="logo"
+                href="#overview"
+                aria-label="Go to overview"
+                data-i18n="go_to_overview"
+                data-i18n-attr="aria-label"
+            >
                 HONG SEUNGWOO
-            </div>
+            </a>
 
             <nav class="nav" aria-label="Primary navigation">
                 <ul class="nav__list">
@@ -33,14 +65,38 @@
             </nav>
 
             <div class="header__actions">
-                <div class="lang-switch" aria-label="Language switcher" role="group">
-                    <button class="lang-switch__button is-active" type="button" data-lang="ko">
+                <div
+                    class="lang-switch"
+                    aria-label="Language switcher"
+                    role="group"
+                    data-i18n="language_switcher_label"
+                    data-i18n-attr="aria-label"
+                >
+                    <button
+                        class="lang-switch__button is-active"
+                        type="button"
+                        data-lang="ko"
+                        aria-label="한국어"
+                        aria-pressed="true"
+                    >
                         <span class="lang-switch__label">KR</span>
                     </button>
-                    <button class="lang-switch__button" type="button" data-lang="ja">
+                    <button
+                        class="lang-switch__button"
+                        type="button"
+                        data-lang="ja"
+                        aria-label="日本語"
+                        aria-pressed="false"
+                    >
                         <span class="lang-switch__label">JP</span>
                     </button>
-                    <button class="lang-switch__button" type="button" data-lang="en">
+                    <button
+                        class="lang-switch__button"
+                        type="button"
+                        data-lang="en"
+                        aria-label="English"
+                        aria-pressed="false"
+                    >
                         <span class="lang-switch__label">EN</span>
                     </button>
                 </div>
@@ -48,6 +104,7 @@
                 <button
                     class="menu-toggle"
                     id="menuToggle"
+                    data-menu-toggle
                     type="button"
                     aria-label="Open menu"
                     aria-expanded="false"
@@ -61,7 +118,16 @@
         </div>
     </header>
 
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <!-- Mobile navigation panel -->
+    <aside
+        class="mobile-menu"
+        id="mobileMenu"
+        aria-hidden="true"
+        aria-label="Mobile menu"
+        data-i18n="mobile_menu_label"
+        data-i18n-attr="aria-label"
+        inert
+    >
         <nav class="mobile-menu__nav" aria-label="Mobile navigation">
             <a class="mobile-menu__link" href="#overview">Overview</a>
             <a class="mobile-menu__link" href="#about">About Me</a>
@@ -70,60 +136,85 @@
             <a class="mobile-menu__link" href="#contact">Contact</a>
         </nav>
 
-        <div class="mobile-menu__lang" aria-label="Mobile language switcher" role="group">
-            <button class="lang-switch__button is-active" type="button" data-lang="ko">
+        <div
+            class="mobile-menu__lang"
+            aria-label="Mobile language switcher"
+            role="group"
+            data-i18n="mobile_language_switcher_label"
+            data-i18n-attr="aria-label"
+        >
+            <button
+                class="lang-switch__button is-active"
+                type="button"
+                data-lang="ko"
+                aria-label="한국어"
+                aria-pressed="true"
+            >
                 <span class="lang-switch__label">KR</span>
             </button>
-            <button class="lang-switch__button" type="button" data-lang="ja">
+            <button
+                class="lang-switch__button"
+                type="button"
+                data-lang="ja"
+                aria-label="日本語"
+                aria-pressed="false"
+            >
                 <span class="lang-switch__label">JP</span>
             </button>
-            <button class="lang-switch__button" type="button" data-lang="en">
+            <button
+                class="lang-switch__button"
+                type="button"
+                data-lang="en"
+                aria-label="English"
+                aria-pressed="false"
+            >
                 <span class="lang-switch__label">EN</span>
             </button>
         </div>
-    </div>
+    </aside>
 
-    <main>
-        <section class="section section--placeholder" id="overview">
+    <!-- Main content -->
+    <main id="main-content">
+        <section class="section" id="overview" aria-labelledby="overview-title">
             <div class="section__inner">
                 <p class="section__eyebrow" data-i18n="overview_eyebrow">PORTFOLIO</p>
-                <h1 class="section__title" data-i18n="overview_title">안녕하세요, 홍승우입니다.</h1>
+                <h1 class="section__title" id="overview-title" data-i18n="overview_title">안녕하세요, 홍승우입니다.</h1>
                 <p class="section__text" data-i18n="overview_text">
                     사용자 경험과 완성도를 함께 고민하는 개발자 포트폴리오입니다.
                 </p>
             </div>
         </section>
 
-        <section class="section section--placeholder" id="about">
+        <section class="section" id="about" aria-labelledby="about-title">
             <div class="section__inner">
-                <h2 class="section__title" data-i18n="about_title">저를 소개합니다.</h2>
+                <h2 class="section__title" id="about-title" data-i18n="about_title">저를 소개합니다.</h2>
                 <p class="section__text" data-i18n="about_text">
                     문제를 구조적으로 바라보고, 보기 좋은 화면과 읽기 좋은 코드를 함께 만들고 싶습니다.
                 </p>
             </div>
         </section>
 
-        <section class="section section--placeholder" id="skills">
+        <section class="section" id="skills" aria-labelledby="skills-title">
             <div class="section__inner">
-                <h2 class="section__title" data-i18n="skills_title">기술 스택</h2>
+                <h2 class="section__title" id="skills-title" data-i18n="skills_title">기술 스택</h2>
                 <p class="section__text" data-i18n="skills_text">
                     프론트엔드 중심으로 다양한 기술을 학습하고 프로젝트에 적용하고 있습니다.
                 </p>
             </div>
         </section>
 
-        <section class="section section--placeholder" id="projects">
+        <section class="section" id="projects" aria-labelledby="projects-title">
             <div class="section__inner">
-                <h2 class="section__title" data-i18n="projects_title">프로젝트</h2>
+                <h2 class="section__title" id="projects-title" data-i18n="projects_title">프로젝트</h2>
                 <p class="section__text" data-i18n="projects_text">
                     직접 구현하며 배운 내용과 개선 과정을 프로젝트에 담고 있습니다.
                 </p>
             </div>
         </section>
 
-        <section class="section section--placeholder" id="contact">
+        <section class="section" id="contact" aria-labelledby="contact-title">
             <div class="section__inner">
-                <h2 class="section__title" data-i18n="contact_title">연락하기</h2>
+                <h2 class="section__title" id="contact-title" data-i18n="contact_title">연락하기</h2>
                 <p class="section__text" data-i18n="contact_text">
                     협업이나 문의가 있다면 언제든지 편하게 연락해주세요.
                 </p>
