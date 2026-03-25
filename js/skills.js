@@ -1,4 +1,4 @@
-// 스킬 탭과 레벨 그래프 렌더링, 최초 1회 애니메이션을 관리한다.
+// 스킬 탭과 레벨 그래프 렌더링, 최초 1회 애니메이션 조건을 관리한다.
 import { DEFAULT_LANGUAGE, I18N } from "./i18n.js";
 
 const DEFAULT_TAB = "frontend";
@@ -90,12 +90,12 @@ export function initializeSkillsBoard() {
         return;
     }
 
+    const transientHintMedia = window.matchMedia(TRANSIENT_HINT_MEDIA_QUERY);
     let activeTab = DEFAULT_TAB;
-    let hasAnimatedOnView = false;
+    let hasPlayedInitialChartAnimation = false;
     let hintTransitionTimerId = 0;
     let touchHintTimerId = 0;
     let activeHintLevel = null;
-    const transientHintMedia = window.matchMedia(TRANSIENT_HINT_MEDIA_QUERY);
 
     const isTransientHintMode = () => transientHintMedia.matches;
 
@@ -142,7 +142,7 @@ export function initializeSkillsBoard() {
             }
         });
 
-        setHint();
+        setHint(activeHintLevel);
     };
 
     const updateTabs = () => {
@@ -157,36 +157,45 @@ export function initializeSkillsBoard() {
         });
     };
 
-    const renderChart = ({ animate = false } = {}) => {
+    // 첫 화면 로드에서는 그래프를 미리 채우지 않고, 실제로 보일 때만 애니메이션한다.
+    const renderChart = ({ animate = false, revealImmediately = false } = {}) => {
         const skills = SKILL_DATA[activeTab] ?? [];
         const rows = skills.map(createSkillRow);
 
         chart.replaceChildren(...rows);
 
-        if (!animate) {
+        if (revealImmediately) {
             rows.forEach((row) => row.classList.add("is-visible", "is-static"));
             return;
         }
 
-        window.requestAnimationFrame(() => {
-            rows.forEach((row) => row.classList.add("is-visible"));
-        });
+        if (animate) {
+            window.requestAnimationFrame(() => {
+                rows.forEach((row) => row.classList.add("is-visible"));
+            });
+        }
     };
 
-    const activateTab = (nextTab, { animate = true } = {}) => {
+    const activateTab = (nextTab) => {
         if (!Object.hasOwn(SKILL_DATA, nextTab)) {
             return;
         }
 
         activeTab = nextTab;
         updateTabs();
-        renderChart({ animate });
+
+        if (hasPlayedInitialChartAnimation) {
+            renderChart({ animate: true });
+            return;
+        }
+
+        renderChart();
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            if (!hasAnimatedOnView && entry.isIntersecting) {
-                hasAnimatedOnView = true;
+            if (!hasPlayedInitialChartAnimation && entry.isIntersecting) {
+                hasPlayedInitialChartAnimation = true;
                 renderChart({ animate: true });
             }
         });
@@ -199,7 +208,7 @@ export function initializeSkillsBoard() {
             const nextTab = tab.dataset.skillTab;
 
             if (nextTab && nextTab !== activeTab) {
-                activateTab(nextTab, { animate: true });
+                activateTab(nextTab);
             }
         });
     });
@@ -220,9 +229,10 @@ export function initializeSkillsBoard() {
         point.addEventListener("click", () => {
             if (isTransientHintMode()) {
                 setHint(level, { temporary: true });
-            } else {
-                setHint(level);
+                return;
             }
+
+            setHint(level);
         });
 
         point.addEventListener("mouseleave", () => {
@@ -243,7 +253,6 @@ export function initializeSkillsBoard() {
     document.addEventListener("portfolio:languagechange", () => {
         updateLevelPointTooltips();
         updateTabs();
-        setHint(activeHintLevel);
     });
 
     const handleHintModeChange = () => {
@@ -259,5 +268,5 @@ export function initializeSkillsBoard() {
 
     updateLevelPointTooltips();
     updateTabs();
-    renderChart({ animate: false });
+    renderChart();
 }

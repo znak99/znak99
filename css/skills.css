@@ -535,3 +535,38 @@
         transition: none;
     }
 }
+/* 그래프가 실제로 활성화되기 전에는 바가 미리 채워져 보이지 않도록 숨긴다. */
+.skills-board__chart:not(.is-animated) .skills-board__row {
+    opacity: 0 !important;
+    transform: translateY(10px) !important;
+}
+
+.skills-board__chart:not(.is-animated) .skills-board__fill {
+    transform: scaleX(0) !important;
+    transform-origin: left center;
+    opacity: 0.18 !important;
+}
+
+.skills-board__chart.is-animated .skills-board__row {
+    transition:
+        opacity 0.42s ease,
+        transform 0.42s ease;
+}
+
+.skills-board__chart.is-animated .skills-board__fill {
+    transition:
+        transform 0.92s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.48s ease;
+}
+
+.skills-board__chart.is-animated .skills-board__row.is-visible,
+.skills-board__chart.is-animated .skills-board__row.is-static {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skills-board__chart.is-animated .skills-board__row.is-visible .skills-board__fill,
+.skills-board__chart.is-animated .skills-board__row.is-static .skills-board__fill {
+    transform: scaleX(1);
+    opacity: 1;
+}
