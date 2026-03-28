@@ -73,10 +73,12 @@
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/skills.css">
     <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/language-transition.css">
 
     <script type="module">
         import("./js/projects-i18n.js")
+            .then(() => import("./js/contact-i18n.js"))
             .then(() => import("./js/main.js"))
             .then(() => import("./js/skills-visibility-fix.js"));
     </script>
@@ -611,10 +613,80 @@
             </div>
         </section>
 
-        <section class="section" id="contact" aria-labelledby="contact-title">
-            <div class="section__inner">
-                <h2 class="section__title" id="contact-title" data-i18n="contact_title"></h2>
-                <p class="section__text" data-i18n="contact_text"></p>
+        <section class="section section--contact" id="contact" aria-labelledby="contact-title">
+            <div class="section__inner contact">
+                <div class="contact__heading">
+                    <p class="section__eyebrow" data-i18n="contact_eyebrow"></p>
+                    <h2 class="section__title contact__title" id="contact-title" data-i18n="contact_title"></h2>
+                    <p class="section__text contact__lead" data-i18n="contact_text"></p>
+                </div>
+
+                <div class="contact__layout">
+                    <article class="contact__panel contact__panel--intro" aria-labelledby="contact-intro-title">
+                        <p class="contact__label" data-i18n="contact_intro_label"></p>
+                        <h3 class="contact__panel-title" id="contact-intro-title" data-i18n="contact_intro_title"></h3>
+                        <p class="contact__panel-text" data-i18n="contact_intro_text"></p>
+
+                        <div class="contact__actions">
+                            <a class="contact__button" href="mailto:hello@example.com" data-i18n="contact_cta_primary"></a>
+                            <a class="contact__button contact__button--ghost" href="#projects" data-i18n="contact_cta_secondary"></a>
+                        </div>
+
+                        <p class="contact__note" data-i18n="contact_note"></p>
+                    </article>
+
+                    <aside class="contact__panel contact__panel--details" aria-labelledby="contact-details-title">
+                        <p class="contact__label" data-i18n="contact_details_label"></p>
+                        <h3 class="contact__panel-title" id="contact-details-title" data-i18n="contact_details_title"></h3>
+
+                        <dl class="contact__details-list">
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_1"></dt>
+                                <dd data-i18n="contact_detail_value_1"></dd>
+                            </div>
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_2"></dt>
+                                <dd data-i18n="contact_detail_value_2"></dd>
+                            </div>
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_3"></dt>
+                                <dd data-i18n="contact_detail_value_3"></dd>
+                            </div>
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_4"></dt>
+                                <dd data-i18n="contact_detail_value_4"></dd>
+                            </div>
+                        </dl>
+
+                        <div class="contact__signal" aria-hidden="true">
+                            <span class="contact__signal-line contact__signal-line--1"></span>
+                            <span class="contact__signal-line contact__signal-line--2"></span>
+                            <span class="contact__signal-dot contact__signal-dot--1"></span>
+                            <span class="contact__signal-dot contact__signal-dot--2"></span>
+                            <span class="contact__signal-dot contact__signal-dot--3"></span>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="contact__summary" aria-label="Contact summary">
+                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-1">
+                        <p class="contact__summary-label" data-i18n="contact_summary_label_1"></p>
+                        <h3 class="contact__summary-title" id="contact-summary-title-1" data-i18n="contact_summary_title_1"></h3>
+                        <p class="contact__summary-text" data-i18n="contact_summary_text_1"></p>
+                    </article>
+
+                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-2">
+                        <p class="contact__summary-label" data-i18n="contact_summary_label_2"></p>
+                        <h3 class="contact__summary-title" id="contact-summary-title-2" data-i18n="contact_summary_title_2"></h3>
+                        <p class="contact__summary-text" data-i18n="contact_summary_text_2"></p>
+                    </article>
+
+                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-3">
+                        <p class="contact__summary-label" data-i18n="contact_summary_label_3"></p>
+                        <h3 class="contact__summary-title" id="contact-summary-title-3" data-i18n="contact_summary_title_3"></h3>
+                        <p class="contact__summary-text" data-i18n="contact_summary_text_3"></p>
+                    </article>
+                </div>
             </div>
         </section>
     </main>
