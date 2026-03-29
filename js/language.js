@@ -11,6 +11,9 @@ const LANGUAGE_TRANSITION_RESET_MS = 280;
 let currentLanguage = DEFAULT_LANGUAGE;
 let isLanguageTransitionRunning = false;
 let reducedMotionMedia = null;
+let transitionOutTimerId = 0;
+let transitionResetTimerId = 0;
+let pendingLanguage = null;
 
 function isSupportedLanguage(language) {
     return typeof language === "string" && SUPPORTED_LANGUAGES.has(language);
@@ -130,27 +133,37 @@ function setLanguage(language, { persist = true } = {}) {
 }
 
 function changeLanguageWithTransition(language) {
-    if (language === currentLanguage) {
+    const nextLanguage = isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE;
+
+    if (nextLanguage === currentLanguage && !isLanguageTransitionRunning) {
         return;
     }
 
-    if (reducedMotionMedia?.matches || isLanguageTransitionRunning) {
-        setLanguage(language);
+    if (reducedMotionMedia?.matches) {
+        setLanguage(nextLanguage);
         return;
     }
 
-    isLanguageTransitionRunning = true;
-    document.body.classList.add("is-language-changing");
+    pendingLanguage = nextLanguage;
+    window.clearTimeout(transitionOutTimerId);
+    window.clearTimeout(transitionResetTimerId);
 
-    window.setTimeout(() => {
-        setLanguage(language);
+    if (!isLanguageTransitionRunning) {
+        isLanguageTransitionRunning = true;
+        document.body.classList.add("is-language-changing");
+    }
+
+    transitionOutTimerId = window.setTimeout(() => {
+        const finalLanguage = pendingLanguage ?? currentLanguage;
+        setLanguage(finalLanguage);
 
         window.requestAnimationFrame(() => {
             document.body.classList.remove("is-language-changing");
         });
 
-        window.setTimeout(() => {
+        transitionResetTimerId = window.setTimeout(() => {
             isLanguageTransitionRunning = false;
+            pendingLanguage = null;
         }, LANGUAGE_TRANSITION_RESET_MS);
     }, LANGUAGE_TRANSITION_OUT_MS);
 }

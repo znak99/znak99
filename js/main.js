@@ -8,6 +8,7 @@ function finishInitialLoad() {
     const loadingScreen = document.getElementById("loadingScreen");
 
     window.requestAnimationFrame(() => {
+        window.__portfolioBoot?.markReady?.();
         document.documentElement.classList.remove("is-loading");
 
         if (loadingScreen) {

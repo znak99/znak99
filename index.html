@@ -65,6 +65,47 @@
         })();
     </script>
 
+    <script>
+        (() => {
+            const BOOT_TIMEOUT_MS = 4000;
+
+            const releaseLoading = () => {
+                document.documentElement.classList.remove("is-loading");
+
+                const loadingScreen = document.getElementById("loadingScreen");
+
+                if (loadingScreen) {
+                    loadingScreen.setAttribute("aria-hidden", "true");
+                }
+            };
+
+            let timeoutId = 0;
+
+            const bootState = {
+                isReady: false,
+                markReady() {
+                    this.isReady = true;
+                    window.clearTimeout(timeoutId);
+                },
+                fail() {
+                    if (this.isReady) {
+                        return;
+                    }
+
+                    releaseLoading();
+                }
+            };
+
+            timeoutId = window.setTimeout(() => {
+                bootState.fail();
+            }, BOOT_TIMEOUT_MS);
+
+            window.__portfolioBoot = bootState;
+            window.addEventListener("error", () => bootState.fail(), { once: true });
+            window.addEventListener("unhandledrejection", () => bootState.fail(), { once: true });
+        })();
+    </script>
+
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/header.css">
@@ -76,12 +117,7 @@
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/language-transition.css">
 
-    <script type="module">
-        import("./js/projects-i18n.js")
-            .then(() => import("./js/contact-i18n.js"))
-            .then(() => import("./js/main.js"))
-            .then(() => import("./js/skills-visibility-fix.js"));
-    </script>
+    <script type="module" src="js/main.js"></script>
 </head>
 <body>
     <div class="loading-screen" id="loadingScreen" role="status" aria-live="polite">

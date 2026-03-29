@@ -162,15 +162,18 @@ export function initializeSkillsBoard() {
         const skills = SKILL_DATA[activeTab] ?? [];
         const rows = skills.map(createSkillRow);
 
+        chart.classList.remove("is-animated");
         chart.replaceChildren(...rows);
 
         if (revealImmediately) {
             rows.forEach((row) => row.classList.add("is-visible", "is-static"));
+            chart.classList.add("is-animated");
             return;
         }
 
         if (animate) {
             window.requestAnimationFrame(() => {
+                chart.classList.add("is-animated");
                 rows.forEach((row) => row.classList.add("is-visible"));
             });
         }
