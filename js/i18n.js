@@ -7,6 +7,7 @@ export const STORAGE_KEYS = {
 
 export const I18N = {
     ko: {
+        site_last_updated: "마지막 업데이트: 2026/03/30",
         skip_to_content: "본문으로 바로가기",
         go_to_overview: "개요로 이동",
         language_switcher_label: "언어 선택",
@@ -134,6 +135,7 @@ export const I18N = {
         contact_summary_text_3: "작업 중에는 짧고 명확한 피드백 루프로 방향을 고정하는 방식을 선호합니다."
     },
     ja: {
+        site_last_updated: "最終更新: 2026/03/30",
         skip_to_content: "本文へ移動",
         go_to_overview: "概要へ移動",
         language_switcher_label: "言語切替",
@@ -261,6 +263,7 @@ export const I18N = {
         contact_summary_text_3: "作業中は短く明確なフィードバックループで方向を揃える進め方を好みます。"
     },
     en: {
+        site_last_updated: "Last updated: 2026/03/30",
         skip_to_content: "Skip to content",
         go_to_overview: "Go to overview",
         language_switcher_label: "Language switcher",
