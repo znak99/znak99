@@ -401,68 +401,63 @@
         <!-- About Me -->
         <section class="section section--about" id="about" aria-labelledby="about-title">
             <div class="section__inner about">
-                <div class="about__top">
-                    <aside class="about__profile" aria-labelledby="about-profile-title">
-                        <div class="about__avatar" aria-hidden="true">HS</div>
-                        <div class="about__profile-copy">
-                            <p class="about__profile-label" data-i18n="about_profile_label"></p>
-                            <h3 class="about__profile-title" id="about-profile-title" data-i18n="about_profile_name"></h3>
-                            <p class="about__profile-role" data-i18n="about_profile_role"></p>
-                            <p class="about__profile-status" data-i18n="about_profile_status"></p>
-                        </div>
-
-                        <ul
-                            class="about__profile-tags"
-                            aria-label="Profile keywords"
-                            role="list"
-                            data-i18n="about_profile_tags_label"
-                            data-i18n-attr="aria-label"
-                        >
-                            <li data-i18n="about_tag_1"></li>
-                            <li data-i18n="about_tag_2"></li>
-                            <li data-i18n="about_tag_3"></li>
-                            <li data-i18n="about_tag_4"></li>
-                        </ul>
-                    </aside>
-
+                <div class="about__layout">
                     <div class="about__heading">
                         <p class="section__eyebrow" data-i18n="about_eyebrow"></p>
-                        <h2 class="section__title about__title" id="about-title" data-i18n="about_title"></h2>
+                        <h2 class="section__title about__title" id="about-title">
+                            <span class="about__title-line" data-i18n="about_title_line_1"></span>
+                            <span class="about__title-line" data-i18n="about_title_line_2"></span>
+                        </h2>
                         <p class="section__text about__lead" data-i18n="about_intro"></p>
                         <p class="about__note" data-i18n="about_note"></p>
                     </div>
-                </div>
 
-                <div class="about__content">
-                    <article class="about__story" aria-labelledby="about-story-title">
+                    <aside class="about__profile" aria-labelledby="about-profile-title">
+                        <div class="about__photo">
+                            <img
+                                class="about__photo-image"
+                                src="assets/images/profile/hong-seungwoo-profile.jpg"
+                                alt="Hong Seungwoo profile photo"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div class="about__profile-copy">
+                            <p class="about__profile-label" data-i18n="about_profile_label"></p>
+                            <h3 class="about__profile-title" id="about-profile-title" data-i18n="about_profile_name"></h3>
+                        </div>
+
+                        <dl class="about__profile-details">
+                            <div class="about__profile-item">
+                                <dt data-i18n="about_profile_detail_label_1"></dt>
+                                <dd data-i18n="about_profile_detail_value_1"></dd>
+                            </div>
+                            <div class="about__profile-item">
+                                <dt data-i18n="about_profile_detail_label_2"></dt>
+                                <dd data-i18n="about_profile_detail_value_2"></dd>
+                            </div>
+                            <div class="about__profile-item">
+                                <dt data-i18n="about_profile_detail_label_3"></dt>
+                                <dd data-i18n="about_profile_detail_value_3"></dd>
+                            </div>
+                            <div class="about__profile-item">
+                                <dt data-i18n="about_profile_detail_label_4"></dt>
+                                <dd data-i18n="about_profile_detail_value_4"></dd>
+                            </div>
+                        </dl>
+                    </aside>
+
+                    <article class="about__story about__story--work" aria-labelledby="about-story-title">
                         <h3 class="about__subheading" id="about-story-title" data-i18n="about_story_title"></h3>
                         <p data-i18n="about_story_text_1"></p>
                         <p data-i18n="about_story_text_2"></p>
                     </article>
 
-                    <div class="about__rail">
-                        <section class="about__facts" aria-labelledby="about-facts-title">
-                            <h3 class="about__subheading" id="about-facts-title" data-i18n="about_facts_title"></h3>
-                            <dl class="about__facts-list">
-                                <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_1"></dt>
-                                    <dd data-i18n="about_fact_value_1"></dd>
-                                </div>
-                                <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_2"></dt>
-                                    <dd data-i18n="about_fact_value_2"></dd>
-                                </div>
-                                <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_3"></dt>
-                                    <dd data-i18n="about_fact_value_3"></dd>
-                                </div>
-                                <div class="about__facts-item">
-                                    <dt data-i18n="about_fact_label_4"></dt>
-                                    <dd data-i18n="about_fact_value_4"></dd>
-                                </div>
-                            </dl>
-                        </section>
-                    </div>
+                    <article class="about__story about__story--team" aria-labelledby="about-teamwork-title">
+                        <h3 class="about__subheading" id="about-teamwork-title" data-i18n="about_teamwork_title"></h3>
+                        <p data-i18n="about_teamwork_text_1"></p>
+                        <p data-i18n="about_teamwork_text_2"></p>
+                    </article>
                 </div>
             </div>
         </section>
