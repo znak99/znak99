@@ -1,36 +1,41 @@
 <!DOCTYPE html>
-<html lang="und">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hong Seungwoo | Frontend Developer Portfolio</title>
+    <title>Hong Seungwoo's Web Portfolio</title>
     <meta
         name="description"
-        content="Hong Seungwoo's portfolio website focused on frontend development and polished user experience."
+        content="Building toward a T-shaped engineering profile with a broad grounding in web development, while deepening expertise in backend architecture and cloud design."
     >
     <meta name="author" content="Hong Seungwoo">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#07090f">
     <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
+    <link rel="canonical" href="https://znak99.github.io/znak99">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Hong Seungwoo Portfolio">
-    <meta property="og:title" content="Hong Seungwoo | Frontend Developer Portfolio">
+    <meta property="og:url" content="https://znak99.github.io/znak99">
+    <meta property="og:site_name" content="Hong Seungwoo's Web Portfolio">
+    <meta property="og:title" content="Hong Seungwoo's Web Portfolio">
     <meta
         property="og:description"
-        content="Hong Seungwoo's portfolio website focused on frontend development and polished user experience."
+        content="Building toward a T-shaped engineering profile with a broad grounding in web development, while deepening expertise in backend architecture and cloud design."
     >
     <meta property="og:locale" content="en_US">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Hong Seungwoo | Frontend Developer Portfolio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hong Seungwoo's Web Portfolio">
     <meta
         name="twitter:description"
-        content="Hong Seungwoo's portfolio website focused on frontend development and polished user experience."
+        content="Building toward a T-shaped engineering profile with a broad grounding in web development, while deepening expertise in backend architecture and cloud design."
     >
+
+    <script src="js/head-content.js"></script>
 
     <script>
         (() => {
             const STORAGE_KEY = "portfolio-language";
             const supportedLanguages = new Set(["ko", "ja", "en"]);
+            const headContent = window.__portfolioHeadContent ?? {};
             const storedLanguage = (() => {
                 try {
                     return localStorage.getItem(STORAGE_KEY);
@@ -59,8 +64,38 @@
                 ? storedLanguage
                 : detectSystemLanguage();
 
+            const setMetaContent = (selector, value) => {
+                const element = document.querySelector(selector);
+
+                if (element && typeof value === "string") {
+                    element.setAttribute("content", value);
+                }
+            };
+
+            const applyHeadContent = (language) => {
+                const fallbackContent = headContent.en ?? {};
+                const nextHeadContent = headContent[language] ?? fallbackContent;
+
+                if (!nextHeadContent || typeof nextHeadContent !== "object") {
+                    return;
+                }
+
+                if (typeof nextHeadContent.title === "string") {
+                    document.title = nextHeadContent.title;
+                }
+
+                setMetaContent('meta[name="description"]', nextHeadContent.description);
+                setMetaContent('meta[property="og:site_name"]', nextHeadContent.siteName);
+                setMetaContent('meta[property="og:title"]', nextHeadContent.title);
+                setMetaContent('meta[property="og:description"]', nextHeadContent.description);
+                setMetaContent('meta[property="og:locale"]', nextHeadContent.locale);
+                setMetaContent('meta[name="twitter:title"]', nextHeadContent.title);
+                setMetaContent('meta[name="twitter:description"]', nextHeadContent.description);
+            };
+
             document.documentElement.lang = initialLanguage;
             document.documentElement.dataset.language = initialLanguage;
+            applyHeadContent(initialLanguage);
             document.documentElement.classList.add("is-loading");
         })();
     </script>

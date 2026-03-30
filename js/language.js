@@ -1,5 +1,5 @@
 // 다국어 상태와 메타데이터, 언어 전환 효과를 한곳에서 관리한다.
-import { DEFAULT_LANGUAGE, SITE_TITLE, STORAGE_KEYS, LOCALE_CODES, I18N } from "./i18n.js";
+import { DEFAULT_LANGUAGE, STORAGE_KEYS, I18N } from "./i18n.js";
 
 const SUPPORTED_LANGUAGES = new Set(Object.keys(I18N));
 const LANGUAGE_BUTTON_SELECTOR = ".lang-switch__button[data-lang]";
@@ -7,6 +7,12 @@ const TRANSLATABLE_SELECTOR = "[data-i18n]";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const LANGUAGE_TRANSITION_OUT_MS = 110;
 const LANGUAGE_TRANSITION_RESET_MS = 280;
+const DEFAULT_HEAD_CONTENT = Object.freeze({
+    title: "Hong Seungwoo's Web Portfolio",
+    description: "Building toward a T-shaped engineering profile with a broad grounding in web development, while deepening expertise in backend architecture and cloud design.",
+    siteName: "Hong Seungwoo's Web Portfolio",
+    locale: "en_US"
+});
 
 let currentLanguage = DEFAULT_LANGUAGE;
 let isLanguageTransitionRunning = false;
@@ -21,6 +27,21 @@ function isSupportedLanguage(language) {
 
 function getTranslation(language = currentLanguage) {
     return I18N[isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE];
+}
+
+function getHeadContent(language = currentLanguage) {
+    const headContent = window.__portfolioHeadContent;
+
+    if (!headContent || typeof headContent !== "object") {
+        return DEFAULT_HEAD_CONTENT;
+    }
+
+    const resolvedLanguage = isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE;
+    const nextHeadContent = headContent[resolvedLanguage] ?? headContent[DEFAULT_LANGUAGE];
+
+    return nextHeadContent && typeof nextHeadContent === "object"
+        ? { ...DEFAULT_HEAD_CONTENT, ...nextHeadContent }
+        : DEFAULT_HEAD_CONTENT;
 }
 
 function getStoredLanguage() {
@@ -76,17 +97,19 @@ function setMetaContent(selector, value) {
 
 function applyTranslations(language) {
     const translation = getTranslation(language);
+    const headContent = getHeadContent(language);
 
     document.documentElement.lang = language;
     document.documentElement.dataset.language = language;
 
-    document.title = SITE_TITLE;
-    setMetaContent('meta[name="description"]', translation.meta_description);
-    setMetaContent('meta[property="og:title"]', SITE_TITLE);
-    setMetaContent('meta[property="og:description"]', translation.meta_description);
-    setMetaContent('meta[property="og:locale"]', LOCALE_CODES[language] ?? LOCALE_CODES[DEFAULT_LANGUAGE]);
-    setMetaContent('meta[name="twitter:title"]', SITE_TITLE);
-    setMetaContent('meta[name="twitter:description"]', translation.meta_description);
+    document.title = headContent.title;
+    setMetaContent('meta[name="description"]', headContent.description);
+    setMetaContent('meta[property="og:site_name"]', headContent.siteName);
+    setMetaContent('meta[property="og:title"]', headContent.title);
+    setMetaContent('meta[property="og:description"]', headContent.description);
+    setMetaContent('meta[property="og:locale"]', headContent.locale);
+    setMetaContent('meta[name="twitter:title"]', headContent.title);
+    setMetaContent('meta[name="twitter:description"]', headContent.description);
 
     document.querySelectorAll(TRANSLATABLE_SELECTOR).forEach((element) => {
         const key = element.dataset.i18n;

@@ -1,20 +1,12 @@
 // 공통 메타 상수와 다국어 사전을 관리한다.
 export const DEFAULT_LANGUAGE = "en";
-export const SITE_TITLE = "Hong Seungwoo | Frontend Developer Portfolio";
 
 export const STORAGE_KEYS = {
     language: "portfolio-language"
 };
 
-export const LOCALE_CODES = {
-    ko: "ko_KR",
-    ja: "ja_JP",
-    en: "en_US"
-};
-
 export const I18N = {
     ko: {
-        meta_description: "프론트엔드 개발과 사용자 경험에 집중하는 홍승우의 포트폴리오 웹페이지입니다.",
         skip_to_content: "본문으로 바로가기",
         go_to_overview: "개요로 이동",
         language_switcher_label: "언어 선택",
@@ -142,7 +134,6 @@ export const I18N = {
         contact_summary_text_3: "작업 중에는 짧고 명확한 피드백 루프로 방향을 고정하는 방식을 선호합니다."
     },
     ja: {
-        meta_description: "フロントエンド開発とユーザー体験に集中するホン・スンウのポートフォリオサイトです。",
         skip_to_content: "本文へ移動",
         go_to_overview: "概要へ移動",
         language_switcher_label: "言語切替",
@@ -270,7 +261,6 @@ export const I18N = {
         contact_summary_text_3: "作業中は短く明確なフィードバックループで方向を揃える進め方を好みます。"
     },
     en: {
-        meta_description: "Hong Seungwoo's portfolio website focused on frontend development and polished user experience.",
         skip_to_content: "Skip to content",
         go_to_overview: "Go to overview",
         language_switcher_label: "Language switcher",
