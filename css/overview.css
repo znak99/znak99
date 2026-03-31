@@ -6,7 +6,7 @@
 }
 
 .page-meta__inner {
-    width: min(100%, 1360px);
+    width: min(100%, 1320px);
     margin: 0 auto;
     padding: 0 56px;
 }
@@ -27,7 +27,7 @@
 }
 
 .section--overview .section__inner {
-    max-width: 1360px;
+    max-width: 1320px;
     padding: 56px;
 }
 
