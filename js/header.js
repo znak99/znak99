@@ -5,6 +5,7 @@ const HEADER_SCROLL_THRESHOLD = 20;
 const DESKTOP_MEDIA_QUERY = "(min-width: 769px)";
 const MANUAL_SCROLL_INTENT_WINDOW_MS = 900;
 const ACTIVE_SECTION_OFFSET = 28;
+const BOTTOM_SECTION_THRESHOLD = 12;
 const SCROLL_TRIGGER_KEYS = new Set([
     "ArrowDown",
     "ArrowUp",
@@ -90,7 +91,14 @@ export function initializeHeader() {
     // 헤더 바로 아래 기준선을 통과한 마지막 섹션을 현재 위치로 본다.
     const resolveActiveSection = () => {
         const activeLine = window.scrollY + header.offsetHeight + ACTIVE_SECTION_OFFSET;
+        const scrollBottom = window.scrollY + window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
         let currentSectionId = sections[0].id;
+
+        if (scrollBottom >= documentHeight - BOTTOM_SECTION_THRESHOLD) {
+            updateActiveLinks(sections.at(-1)?.id ?? currentSectionId);
+            return;
+        }
 
         sections.forEach((section) => {
             if (section.offsetTop <= activeLine) {
