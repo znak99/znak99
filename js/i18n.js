@@ -122,8 +122,11 @@ export const I18N = {
         projects_card_text_7: "데이터를 한눈에 읽을 수 있는 배치와 시각적 우선순위를 정리하기 위한 대시보드형 더미 프로젝트입니다.",
         projects_card_note_7: "정보가 많아도 시선 흐름이 복잡해지지 않도록 정리하는 방향입니다.",
         contact_eyebrow: "CONTACT",
-        contact_title: "연락은 간결하게, 협업은 명확하게 진행하고 싶습니다.",
-        contact_text: "실제 연락처와 링크는 추후 교체할 예정입니다. 현재는 섹션 구조와 정보 흐름을 확인하기 위한 더미 데이터로 구성되어 있습니다.",
+        contact_title: "연락을 기다리고 있습니다.",
+        contact_text: "어떤 이야기라도 괜찮습니다. 편하게 연락해 주세요. 가볍게 인사를 나누는 정도도 좋습니다.",
+        contact_email_copy_aria: "이메일 주소 복사",
+        contact_email_copied: "이메일이 복사되었습니다.",
+        contact_github_aria: "GitHub 프로필 열기",
         contact_intro_label: "OPEN FOR",
         contact_intro_title: "프론트엔드 작업, 포트폴리오 협업, UI 구조 정리에 열려 있습니다.",
         contact_intro_text: "작은 수정부터 섹션 설계, 다국어 정리, 반응형 UI 다듬기까지 차분하게 범위를 맞춰가며 협업하는 방식을 선호합니다.",
@@ -148,7 +151,8 @@ export const I18N = {
         contact_summary_text_2: "일정, 우선순위, 필요한 산출물을 맞춰보는 단계를 상정했습니다.",
         contact_summary_label_3: "FLOW 03",
         contact_summary_title_3: "Build Window",
-        contact_summary_text_3: "작업 중에는 짧고 명확한 피드백 루프로 방향을 고정하는 방식을 선호합니다."
+        contact_summary_text_3: "작업 중에는 짧고 명확한 피드백 루프로 방향을 고정하는 방식을 선호합니다.",
+        footer_copyright: "© 2026 Hong Seungwoo. All rights reserved."
     },
     ja: {
         site_last_updated: "最終更新: 2026/03/30",
@@ -266,8 +270,11 @@ export const I18N = {
         projects_card_text_7: "データをひと目で読み取れる配置と視覚的な優先順位を整理するためのダッシュボード型ダミープロジェクトです。",
         projects_card_note_7: "情報量が多くても視線の流れが複雑にならないように整える方向です。",
         contact_eyebrow: "CONTACT",
-        contact_title: "連絡は簡潔に、協業は明確に進めたいと考えています。",
-        contact_text: "実際の連絡先やリンクは後で差し替える予定です。現在はセクション構成と情報の流れを確認するためのダミーデータで構成されています。",
+        contact_title: "ご連絡をお待ちしています。",
+        contact_text: "どんな話題でも大丈夫です。気軽にご連絡ください。軽く挨拶を交わすようなやり取りでも歓迎です。",
+        contact_email_copy_aria: "メールアドレスをコピー",
+        contact_email_copied: "メールアドレスをコピーしました。",
+        contact_github_aria: "GitHub プロフィールを開く",
         contact_intro_label: "OPEN FOR",
         contact_intro_title: "フロントエンド作業、ポートフォリオ協業、UI 構成整理に対応できる想定です。",
         contact_intro_text: "小さな修正からセクション設計、多言語整理、レスポンシブ UI の調整まで、落ち着いて範囲を合わせながら進める形を想定しています。",
@@ -292,7 +299,8 @@ export const I18N = {
         contact_summary_text_2: "日程、優先順位、必要な成果物を合わせる段階を想定しています。",
         contact_summary_label_3: "FLOW 03",
         contact_summary_title_3: "Build Window",
-        contact_summary_text_3: "作業中は短く明確なフィードバックループで方向を揃える進め方を好みます。"
+        contact_summary_text_3: "作業中は短く明確なフィードバックループで方向を揃える進め方を好みます。",
+        footer_copyright: "© 2026 Hong Seungwoo. All rights reserved."
     },
     en: {
         site_last_updated: "Last updated: 2026/03/30",
@@ -410,8 +418,11 @@ export const I18N = {
         projects_card_text_7: "A placeholder dashboard study focused on arranging dense information so it can still be scanned quickly and clearly.",
         projects_card_note_7: "The direction is to keep visual hierarchy calm even when the surface carries a lot of data.",
         contact_eyebrow: "CONTACT",
-        contact_title: "I prefer contact to stay concise and collaboration to stay clear.",
-        contact_text: "The real contact details and links will be replaced later. For now, the section uses placeholder data to validate structure and information flow.",
+        contact_title: "I look forward to hearing from you.",
+        contact_text: "Any kind of message is welcome. Feel free to reach out, even if it is just a quick hello.",
+        contact_email_copy_aria: "Copy email address",
+        contact_email_copied: "Email copied to clipboard.",
+        contact_github_aria: "Open GitHub profile",
         contact_intro_label: "OPEN FOR",
         contact_intro_title: "Open to frontend work, portfolio collaboration, and UI structure refinement.",
         contact_intro_text: "The preferred working style is calm and scoped, from small fixes to section planning, multilingual cleanup, and responsive UI refinement.",
@@ -436,6 +447,7 @@ export const I18N = {
         contact_summary_text_2: "The next step is aligning schedule, priorities, and the outputs that matter most.",
         contact_summary_label_3: "FLOW 03",
         contact_summary_title_3: "Build Window",
-        contact_summary_text_3: "During execution, the preferred rhythm is short and clear feedback loops that keep direction stable."
+        contact_summary_text_3: "During execution, the preferred rhythm is short and clear feedback loops that keep direction stable.",
+        footer_copyright: "© 2026 Hong Seungwoo. All rights reserved."
     }
 };

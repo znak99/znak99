@@ -1,5 +1,6 @@
 // 페이지 초기화 순서를 관리하는 진입점이다.
 import { initializeBackgroundMotion } from "./background.js";
+import { initializeContactActions } from "./contact.js";
 import { initializeHeader } from "./header.js";
 import { initializeLanguageSwitcher } from "./language.js";
 import { initializeProjectsSection } from "./projects.js";
@@ -21,6 +22,7 @@ function finishInitialLoad() {
 function initializePortfolio() {
     try {
         initializeBackgroundMotion();
+        initializeContactActions();
         initializeHeader();
         initializeLanguageSwitcher();
         initializeProjectsSection();

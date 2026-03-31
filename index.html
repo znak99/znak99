@@ -767,76 +767,65 @@
                     <p class="section__eyebrow" data-i18n="contact_eyebrow"></p>
                     <h2 class="section__title contact__title" id="contact-title" data-i18n="contact_title"></h2>
                     <p class="section__text contact__lead" data-i18n="contact_text"></p>
-                </div>
 
-                <div class="contact__layout">
-                    <article class="contact__panel contact__panel--intro" aria-labelledby="contact-intro-title">
-                        <p class="contact__label" data-i18n="contact_intro_label"></p>
-                        <h3 class="contact__panel-title" id="contact-intro-title" data-i18n="contact_intro_title"></h3>
-                        <p class="contact__panel-text" data-i18n="contact_intro_text"></p>
+                    <div class="contact__actions contact__actions--primary">
+                        <button
+                            class="contact__button contact__button--copy"
+                            type="button"
+                            data-contact-copy-email
+                            data-contact-email="xhahekcldhkznak0113@gmail.com"
+                            data-i18n="contact_email_copy_aria"
+                            data-i18n-attr="aria-label"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path
+                                    d="M4.5 7.5 12 13l7.5-5.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                />
+                                <rect
+                                    x="3.5"
+                                    y="5"
+                                    width="17"
+                                    height="14"
+                                    rx="3"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+                            </svg>
+                            <span>xhahekcldhkznak0113@gmail.com</span>
+                        </button>
 
-                        <div class="contact__actions">
-                            <a class="contact__button" href="mailto:hello@example.com" data-i18n="contact_cta_primary"></a>
-                            <a class="contact__button contact__button--ghost" href="#projects" data-i18n="contact_cta_secondary"></a>
-                        </div>
+                        <a
+                            class="contact__button contact__button--ghost"
+                            href="https://github.com/znak99"
+                            target="_blank"
+                            rel="noreferrer"
+                            data-i18n="contact_github_aria"
+                            data-i18n-attr="aria-label"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path
+                                    d="M12 2.7a9.3 9.3 0 0 0-2.94 18.12c.47.09.63-.2.63-.45v-1.57c-2.58.56-3.12-1.1-3.12-1.1-.42-1.06-1.03-1.34-1.03-1.34-.84-.57.06-.56.06-.56.93.07 1.42.96 1.42.96.82 1.42 2.16 1.01 2.68.77.08-.6.32-1.01.58-1.24-2.06-.24-4.23-1.03-4.23-4.58 0-1.01.36-1.84.95-2.49-.1-.23-.41-1.18.09-2.45 0 0 .78-.25 2.56.95a8.9 8.9 0 0 1 4.66 0c1.78-1.2 2.56-.95 2.56-.95.5 1.27.19 2.22.09 2.45.59.65.95 1.48.95 2.49 0 3.56-2.18 4.34-4.26 4.58.33.28.62.83.62 1.68v2.49c0 .25.17.55.64.45A9.3 9.3 0 0 0 12 2.7Z"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                            <span>GitHub</span>
+                        </a>
+                    </div>
 
-                        <p class="contact__note" data-i18n="contact_note"></p>
-                    </article>
-
-                    <aside class="contact__panel contact__panel--details" aria-labelledby="contact-details-title">
-                        <p class="contact__label" data-i18n="contact_details_label"></p>
-                        <h3 class="contact__panel-title" id="contact-details-title" data-i18n="contact_details_title"></h3>
-
-                        <dl class="contact__details-list">
-                            <div class="contact__details-item">
-                                <dt data-i18n="contact_detail_label_1"></dt>
-                                <dd data-i18n="contact_detail_value_1"></dd>
-                            </div>
-                            <div class="contact__details-item">
-                                <dt data-i18n="contact_detail_label_2"></dt>
-                                <dd data-i18n="contact_detail_value_2"></dd>
-                            </div>
-                            <div class="contact__details-item">
-                                <dt data-i18n="contact_detail_label_3"></dt>
-                                <dd data-i18n="contact_detail_value_3"></dd>
-                            </div>
-                            <div class="contact__details-item">
-                                <dt data-i18n="contact_detail_label_4"></dt>
-                                <dd data-i18n="contact_detail_value_4"></dd>
-                            </div>
-                        </dl>
-
-                        <div class="contact__signal" aria-hidden="true">
-                            <span class="contact__signal-line contact__signal-line--1"></span>
-                            <span class="contact__signal-line contact__signal-line--2"></span>
-                            <span class="contact__signal-dot contact__signal-dot--1"></span>
-                            <span class="contact__signal-dot contact__signal-dot--2"></span>
-                            <span class="contact__signal-dot contact__signal-dot--3"></span>
-                        </div>
-                    </aside>
-                </div>
-
-                <div class="contact__summary" aria-label="Contact summary">
-                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-1">
-                        <p class="contact__summary-label" data-i18n="contact_summary_label_1"></p>
-                        <h3 class="contact__summary-title" id="contact-summary-title-1" data-i18n="contact_summary_title_1"></h3>
-                        <p class="contact__summary-text" data-i18n="contact_summary_text_1"></p>
-                    </article>
-
-                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-2">
-                        <p class="contact__summary-label" data-i18n="contact_summary_label_2"></p>
-                        <h3 class="contact__summary-title" id="contact-summary-title-2" data-i18n="contact_summary_title_2"></h3>
-                        <p class="contact__summary-text" data-i18n="contact_summary_text_2"></p>
-                    </article>
-
-                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-3">
-                        <p class="contact__summary-label" data-i18n="contact_summary_label_3"></p>
-                        <h3 class="contact__summary-title" id="contact-summary-title-3" data-i18n="contact_summary_title_3"></h3>
-                        <p class="contact__summary-text" data-i18n="contact_summary_text_3"></p>
-                    </article>
+                    <p class="contact__copy-toast" data-contact-copy-toast role="status" aria-live="polite"></p>
                 </div>
             </div>
         </section>
+
+        <footer class="site-footer" aria-label="Footer">
+            <p class="site-footer__copyright" data-i18n="footer_copyright"></p>
+        </footer>
     </main>
 </body>
 </html>
