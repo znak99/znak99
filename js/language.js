@@ -1,18 +1,18 @@
 // 다국어 상태와 메타데이터, 언어 전환 효과를 한곳에서 관리한다.
-import { DEFAULT_LANGUAGE, STORAGE_KEYS, I18N } from "./i18n.js";
+import { DEFAULT_LANGUAGE, REDUCED_MOTION_QUERY, STORAGE_KEYS, I18N } from "./i18n.js";
 
 const SUPPORTED_LANGUAGES = new Set(Object.keys(I18N));
 const LANGUAGE_BUTTON_SELECTOR = ".lang-switch__button[data-lang]";
 const TRANSLATABLE_SELECTOR = "[data-i18n]";
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const LANGUAGE_TRANSITION_OUT_MS = 110;
 const LANGUAGE_TRANSITION_RESET_MS = 280;
-const DEFAULT_HEAD_CONTENT = Object.freeze({
-    title: "Hong Seungwoo's Web Portfolio",
-    description: "Building toward a T-shaped engineering profile with a broad grounding in web development, while deepening expertise in backend architecture and cloud design.",
-    siteName: "Hong Seungwoo's Web Portfolio",
-    locale: "en_US"
-});
+// index.html 인라인 스크립트의 window.__portfolioHeadContent.en을 단일 출처로 사용한다.
+const DEFAULT_HEAD_CONTENT = Object.freeze(
+    (window.__portfolioHeadContent?.[DEFAULT_LANGUAGE]
+        && typeof window.__portfolioHeadContent[DEFAULT_LANGUAGE] === "object")
+        ? window.__portfolioHeadContent[DEFAULT_LANGUAGE]
+        : { title: "", description: "", siteName: "", locale: "en_US" }
+);
 
 let currentLanguage = DEFAULT_LANGUAGE;
 let isLanguageTransitionRunning = false;
@@ -25,7 +25,11 @@ function isSupportedLanguage(language) {
     return typeof language === "string" && SUPPORTED_LANGUAGES.has(language);
 }
 
-function getTranslation(language = currentLanguage) {
+export function getCurrentLanguage() {
+    return currentLanguage;
+}
+
+export function getTranslation(language = currentLanguage) {
     return I18N[isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE];
 }
 
@@ -87,6 +91,7 @@ function resolveInitialLanguage() {
     return getStoredLanguage() ?? detectSystemLanguage();
 }
 
+// 메타 태그의 content 속성을 안전하게 갱신한다.
 function setMetaContent(selector, value) {
     const element = document.querySelector(selector);
 
@@ -95,6 +100,7 @@ function setMetaContent(selector, value) {
     }
 }
 
+// 지정 언어로 DOM 텍스트, 메타 태그, 언어 버튼 상태를 한 번에 갱신한다.
 function applyTranslations(language) {
     const translation = getTranslation(language);
     const headContent = getHeadContent(language);
@@ -137,6 +143,7 @@ function applyTranslations(language) {
     }));
 }
 
+// 언어 선택 버튼의 활성 상태와 aria-pressed 속성을 갱신한다.
 function updateLanguageButtons(language) {
     document.querySelectorAll(LANGUAGE_BUTTON_SELECTOR).forEach((button) => {
         const isActive = button.dataset.lang === language;

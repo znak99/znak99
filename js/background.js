@@ -1,4 +1,6 @@
 // 배경 블롭의 이동과 반사를 제어한다.
+import { REDUCED_MOTION_QUERY } from "./i18n.js";
+
 const ORB_CONFIGS = [
     { selector: ".orb-1", velocityX: 16, velocityY: 12 },
     { selector: ".orb-2", velocityX: -18, velocityY: 10 },
@@ -6,7 +8,6 @@ const ORB_CONFIGS = [
 ];
 
 const ORB_VISIBLE_RATIO = 0.62;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const MAX_DELTA_TIME = 0.033;
 const RESIZE_RESET_DELAY = 120;
 

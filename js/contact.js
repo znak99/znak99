@@ -1,21 +1,12 @@
 // Contact 섹션의 이메일 복사 동작을 처리한다.
-import { DEFAULT_LANGUAGE, I18N } from "./i18n.js";
+import { REDUCED_MOTION_QUERY } from "./i18n.js";
+import { getTranslation } from "./language.js";
 
 const COPIED_STATE_DURATION_MS = 2000;
 const BUTTON_PRESS_DURATION_MS = 220;
 const TOAST_HIDE_TRANSITION_MS = 280;
 const TOAST_FRAGMENT_COUNT = 16;
 const TOAST_FRAGMENT_DURATION_MS = 620;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function getCurrentLanguage() {
-    const language = document.documentElement.lang;
-    return Object.hasOwn(I18N, language) ? language : DEFAULT_LANGUAGE;
-}
-
-function getTranslation() {
-    return I18N[getCurrentLanguage()];
-}
 
 async function copyTextToClipboard(text) {
     if (navigator.clipboard?.writeText) {

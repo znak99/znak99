@@ -75,6 +75,7 @@ export function initializeHeader() {
         }
     };
 
+    // 현재 섹션 ID에 해당하는 네비게이션 링크를 활성 상태로 표시한다.
     const updateActiveLinks = (currentId) => {
         allNavLinks.forEach((link) => {
             const isActive = link.getAttribute("href") === `#${currentId}`;
@@ -145,6 +146,7 @@ export function initializeHeader() {
         }
     }, { passive: true });
 
+    // 스크롤 의도 감지와 모바일 메뉴 닫기를 단일 keydown 핸들러에서 처리한다.
     document.addEventListener("keydown", (event) => {
         if (
             event.isTrusted &&
@@ -155,6 +157,11 @@ export function initializeHeader() {
             !isInteractiveElement(event.target)
         ) {
             markManualScrollIntent(1200);
+        }
+
+        if (event.key === "Escape" && mobileMenu.classList.contains("is-open")) {
+            closeMobileMenu();
+            menuToggle.focus();
         }
     });
 
@@ -170,13 +177,6 @@ export function initializeHeader() {
 
         if (!clickedInsideMenu && !clickedMenuButton) {
             closeMobileMenu();
-        }
-    });
-
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && mobileMenu.classList.contains("is-open")) {
-            closeMobileMenu();
-            menuToggle.focus();
         }
     });
 

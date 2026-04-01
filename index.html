@@ -235,11 +235,11 @@
                     data-i18n-attr="aria-label"
                 >
                     <button
-                        class="lang-switch__button is-active"
+                        class="lang-switch__button"
                         type="button"
                         data-lang="ko"
                         aria-label="한국어"
-                        aria-pressed="true"
+                        aria-pressed="false"
                     >
                         <span class="lang-switch__label">KR</span>
                     </button>
@@ -306,11 +306,11 @@
             data-i18n-attr="aria-label"
         >
             <button
-                class="lang-switch__button is-active"
+                class="lang-switch__button"
                 type="button"
                 data-lang="ko"
                 aria-label="한국어"
-                aria-pressed="true"
+                aria-pressed="false"
             >
                 <span class="lang-switch__label">KR</span>
             </button>
@@ -384,10 +384,10 @@
                         </dl>
 
                         <div class="overview__signal" aria-hidden="true">
-                            <span class="overview__signal-dot overview__signal-dot--1" data-signal-label="Web App"></span>
-                            <span class="overview__signal-dot overview__signal-dot--2" data-signal-label="Server-side"></span>
-                            <span class="overview__signal-dot overview__signal-dot--3" data-signal-label="Cloud"></span>
-                            <span class="overview__signal-dot overview__signal-dot--4" data-signal-label="Mobile"></span>
+                            <span class="overview__signal-dot overview__signal-dot--1"></span>
+                            <span class="overview__signal-dot overview__signal-dot--2"></span>
+                            <span class="overview__signal-dot overview__signal-dot--3"></span>
+                            <span class="overview__signal-dot overview__signal-dot--4"></span>
                             <span class="overview__signal-bubble overview__signal-bubble--1">Web App</span>
                             <span class="overview__signal-bubble overview__signal-bubble--2">Server-side</span>
                             <span class="overview__signal-bubble overview__signal-bubble--3">Cloud</span>
@@ -552,6 +552,7 @@
             </div>
         </section>
 
+        <!-- Projects -->
         <section class="section section--projects" id="projects" aria-labelledby="projects-title">
             <div class="section__inner projects">
                 <div class="projects__heading">
@@ -761,8 +762,12 @@
             </div>
         </section>
 
+        <!-- Contact -->
+        <!-- Contact -->
         <section class="section section--contact" id="contact" aria-labelledby="contact-title">
             <div class="section__inner contact">
+
+                <!-- Contact heading with primary actions -->
                 <div class="contact__heading">
                     <p class="section__eyebrow" data-i18n="contact_eyebrow"></p>
                     <h2 class="section__title contact__title" id="contact-title" data-i18n="contact_title"></h2>
@@ -820,6 +825,87 @@
 
                     <p class="contact__copy-toast" data-contact-copy-toast role="status" aria-live="polite"></p>
                 </div>
+
+                <!-- Contact intro and details panels -->
+                <div class="contact__layout">
+
+                    <!-- Intro panel: availability and CTA -->
+                    <article class="contact__panel contact__panel--intro" aria-labelledby="contact-intro-title">
+                        <p class="contact__label" data-i18n="contact_intro_label"></p>
+                        <h3 class="contact__panel-title" id="contact-intro-title" data-i18n="contact_intro_title"></h3>
+                        <p class="contact__panel-text" data-i18n="contact_intro_text"></p>
+
+                        <div class="contact__actions">
+                            <a
+                                class="contact__button"
+                                href="mailto:xhahekcldhkznak0113@gmail.com"
+                                data-i18n="contact_cta_primary"
+                            ></a>
+                            <a
+                                class="contact__button contact__button--ghost"
+                                href="#projects"
+                                data-i18n="contact_cta_secondary"
+                            ></a>
+                        </div>
+
+                        <p class="contact__note" data-i18n="contact_note"></p>
+
+                        <!-- Decorative signal lines -->
+                        <div class="contact__signal" aria-hidden="true">
+                            <span class="contact__signal-line contact__signal-line--1"></span>
+                            <span class="contact__signal-line contact__signal-line--2"></span>
+                            <span class="contact__signal-dot contact__signal-dot--1"></span>
+                            <span class="contact__signal-dot contact__signal-dot--2"></span>
+                            <span class="contact__signal-dot contact__signal-dot--3"></span>
+                        </div>
+                    </article>
+
+                    <!-- Details panel: contact information -->
+                    <aside class="contact__panel" aria-labelledby="contact-details-title">
+                        <p class="contact__label" data-i18n="contact_details_label"></p>
+                        <h3 class="contact__panel-title" id="contact-details-title" data-i18n="contact_details_title"></h3>
+
+                        <dl class="contact__details-list">
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_1"></dt>
+                                <dd data-i18n="contact_detail_value_1"></dd>
+                            </div>
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_2"></dt>
+                                <dd data-i18n="contact_detail_value_2"></dd>
+                            </div>
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_3"></dt>
+                                <dd data-i18n="contact_detail_value_3"></dd>
+                            </div>
+                            <div class="contact__details-item">
+                                <dt data-i18n="contact_detail_label_4"></dt>
+                                <dd data-i18n="contact_detail_value_4"></dd>
+                            </div>
+                        </dl>
+                    </aside>
+
+                </div>
+
+                <!-- Contact flow summary cards -->
+                <div class="contact__summary">
+                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-1">
+                        <p class="contact__summary-label" data-i18n="contact_summary_label_1"></p>
+                        <h3 class="contact__summary-title" id="contact-summary-title-1" data-i18n="contact_summary_title_1"></h3>
+                        <p class="contact__summary-text" data-i18n="contact_summary_text_1"></p>
+                    </article>
+                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-2">
+                        <p class="contact__summary-label" data-i18n="contact_summary_label_2"></p>
+                        <h3 class="contact__summary-title" id="contact-summary-title-2" data-i18n="contact_summary_title_2"></h3>
+                        <p class="contact__summary-text" data-i18n="contact_summary_text_2"></p>
+                    </article>
+                    <article class="contact__summary-card" aria-labelledby="contact-summary-title-3">
+                        <p class="contact__summary-label" data-i18n="contact_summary_label_3"></p>
+                        <h3 class="contact__summary-title" id="contact-summary-title-3" data-i18n="contact_summary_title_3"></h3>
+                        <p class="contact__summary-text" data-i18n="contact_summary_text_3"></p>
+                    </article>
+                </div>
+
             </div>
         </section>
 
