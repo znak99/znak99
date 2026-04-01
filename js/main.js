@@ -27,6 +27,9 @@ function initializePortfolio() {
         initializeLanguageSwitcher();
         initializeProjectsSection();
         initializeSkillsBoard();
+    } catch (error) {
+        // 초기화 실패 시 콘솔에 기록하고 로딩 화면은 정상 종료한다.
+        console.error("[portfolio] 초기화 오류:", error);
     } finally {
         finishInitialLoad();
     }

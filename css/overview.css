@@ -6,7 +6,7 @@
 }
 
 .page-meta__inner {
-    width: min(100%, 1320px);
+    width: min(100%, var(--container-width));
     margin: 0 auto;
     padding: 0 56px;
 }
@@ -63,7 +63,6 @@
     pointer-events: none;
 }
 
-.overview__intro,
 .overview__intro {
     position: relative;
     z-index: 1;

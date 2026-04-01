@@ -1,12 +1,13 @@
 // 공통 메타 상수와 다국어 사전을 관리한다.
 export const DEFAULT_LANGUAGE = "en";
+export const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 export const STORAGE_KEYS = {
     language: "portfolio-language"
 };
 
-export const I18N = {
-    ko: {
+export const I18N = Object.freeze({
+    ko: Object.freeze({
         site_last_updated: "마지막 업데이트: 2026/03/30",
         skip_to_content: "본문으로 바로가기",
         go_to_overview: "개요로 이동",
@@ -50,7 +51,7 @@ export const I18N = {
         about_story_title: "작업 방식",
         about_story_text_1: "작업을 시작할 때는 해야 할 일을 먼저 세분화하고, 진행 순서를 정리합니다. 각 작업마다 목표를 분명하게 잡은 뒤, 하나씩 꼼꼼하게 확인하며 진행하는 방식을 중요하게 생각합니다.",
         about_story_text_2: "구현 단계에서는 읽기 쉬운 구조와 유지보수성을 우선합니다. 중복을 줄이고 역할을 분리해, 나중에 다른 사람이 보더라도 빠르게 이해하고 수정할 수 있는 코드로 만드는 것을 중요하게 생각합니다.",
-        about_teamwork_title: "팀워크",
+        about_teamwork_title: "TEAMWORK",
         about_teamwork_text_1: "협업에서는 현재 상황과 해야 할 일을 분명하게 공유하는 것을 중요하게 생각합니다. 팀이 같은 방향으로 움직일 수 있도록 소통하려고 합니다.",
         about_teamwork_text_2: "문제가 생기면 혼자 오래 붙잡기보다 먼저 원인을 정리하고, 필요한 경우 빠르게 상의해 해결 방향을 맞춥니다.",
         skills_eyebrow: "SKILLS",
@@ -153,8 +154,8 @@ export const I18N = {
         contact_summary_title_3: "Build Window",
         contact_summary_text_3: "작업 중에는 짧고 명확한 피드백 루프로 방향을 고정하는 방식을 선호합니다.",
         footer_copyright: "© 2026 Hong Seungwoo. All rights reserved."
-    },
-    ja: {
+    }),
+    ja: Object.freeze({
         site_last_updated: "最終更新: 2026/03/30",
         skip_to_content: "本文へ移動",
         go_to_overview: "概要へ移動",
@@ -301,8 +302,8 @@ export const I18N = {
         contact_summary_title_3: "Build Window",
         contact_summary_text_3: "作業中は短く明確なフィードバックループで方向を揃える進め方を好みます。",
         footer_copyright: "© 2026 Hong Seungwoo. All rights reserved."
-    },
-    en: {
+    }),
+    en: Object.freeze({
         site_last_updated: "Last updated: 2026/03/30",
         skip_to_content: "Skip to content",
         go_to_overview: "Go to overview",
@@ -449,5 +450,5 @@ export const I18N = {
         contact_summary_title_3: "Build Window",
         contact_summary_text_3: "During execution, the preferred rhythm is short and clear feedback loops that keep direction stable.",
         footer_copyright: "© 2026 Hong Seungwoo. All rights reserved."
-    }
-};
+    })
+});

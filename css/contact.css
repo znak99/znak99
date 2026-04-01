@@ -1,13 +1,13 @@
 .section--contact {
-    --contact-border: rgba(162, 177, 198, 0.14);
+    --contact-border: rgb(162 177 198 / 0.14);
     --contact-card-bg:
-        radial-gradient(circle at top left, rgba(66, 148, 108, 0.12), transparent 42%),
-        linear-gradient(180deg, rgba(9, 13, 23, 0.9), rgba(7, 10, 18, 0.76));
+        radial-gradient(circle at top left, rgb(66 148 108 / 0.12), transparent 42%),
+        linear-gradient(180deg, rgb(9 13 23 / 0.9), rgb(7 10 18 / 0.76));
     --contact-panel-bg:
-        linear-gradient(140deg, rgba(9, 13, 24, 0.92), rgba(7, 10, 18, 0.82));
-    --contact-muted: rgba(216, 223, 234, 0.7);
-    --contact-accent: rgba(95, 231, 156, 0.92);
-    --contact-shadow: 0 26px 54px rgba(0, 0, 0, 0.26);
+        linear-gradient(140deg, rgb(9 13 24 / 0.92), rgb(7 10 18 / 0.82));
+    --contact-muted: rgb(216 223 234 / 0.7);
+    --contact-accent: rgb(var(--color-accent-rgb) / 0.92);
+    --contact-shadow: 0 26px 54px rgb(0 0 0 / 0.26);
     min-height: auto;
     align-items: flex-start;
     padding-top: 28px;
@@ -34,6 +34,7 @@
     text-wrap: pretty;
 }
 
+/* Contact layout panels */
 .contact__layout {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
@@ -69,7 +70,7 @@
 .contact__panel-title,
 .contact__summary-title {
     margin: 0;
-    color: rgba(245, 247, 252, 0.96);
+    color: rgb(245 247 252 / 0.96);
     line-height: 1.14;
 }
 
@@ -97,6 +98,7 @@
     gap: 14px;
 }
 
+/* Contact buttons */
 .contact__button {
     display: inline-flex;
     align-items: center;
@@ -105,9 +107,9 @@
     min-height: 48px;
     padding: 0 18px;
     border-radius: 999px;
-    border: 1px solid rgba(103, 219, 158, 0.34);
-    background: rgba(35, 98, 67, 0.2);
-    color: rgba(245, 248, 252, 0.96);
+    border: 1px solid rgb(103 219 158 / 0.34);
+    background: rgb(35 98 67 / 0.2);
+    color: rgb(245 248 252 / 0.96);
     text-decoration: none;
     font-weight: 600;
     transition:
@@ -130,8 +132,8 @@
 .contact__button:hover,
 .contact__button:focus-visible {
     transform: translateY(-1px);
-    border-color: rgba(118, 234, 173, 0.46);
-    background: rgba(38, 112, 75, 0.28);
+    border-color: rgb(118 234 173 / 0.46);
+    background: rgb(38 112 75 / 0.28);
 }
 
 .contact__button.is-pressing {
@@ -139,16 +141,17 @@
 }
 
 .contact__button--ghost {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: rgba(229, 235, 244, 0.88);
+    background: rgb(255 255 255 / 0.03);
+    border-color: rgb(255 255 255 / 0.1);
+    color: rgb(229 235 244 / 0.88);
 }
 
 .contact__button--copy.is-copied {
-    border-color: rgba(118, 234, 173, 0.5);
-    background: rgba(38, 112, 75, 0.34);
+    border-color: rgb(118 234 173 / 0.5);
+    background: rgb(38 112 75 / 0.34);
 }
 
+/* Copy toast */
 .contact__copy-toast {
     position: fixed;
     left: 50%;
@@ -156,14 +159,14 @@
     z-index: 40;
     margin: 0;
     padding: 12px 16px;
-    border: 1px solid rgba(118, 234, 173, 0.58);
+    border: 1px solid rgb(118 234 173 / 0.58);
     border-radius: 999px;
-    background: rgba(38, 112, 75, 0.96);
-    color: rgba(248, 252, 250, 0.98);
+    background: rgb(38 112 75 / 0.96);
+    color: rgb(248 252 250 / 0.98);
     font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.02em;
-    box-shadow: 0 18px 36px rgba(8, 18, 14, 0.36), 0 0 0 1px rgba(173, 247, 205, 0.12);
+    box-shadow: 0 18px 36px rgb(8 18 14 / 0.36), 0 0 0 1px rgb(173 247 205 / 0.12);
     opacity: 0;
     transform: translate(-50%, 18px);
     pointer-events: none;
@@ -182,6 +185,7 @@
     transform: translate(-50%, 24px);
 }
 
+/* Toast fragment burst */
 .contact__copy-burst {
     position: fixed;
     z-index: 41;
@@ -197,16 +201,17 @@
     height: var(--fragment-height);
     border-radius: 999px;
     background:
-        linear-gradient(135deg, rgba(186, 255, 217, 0.9), rgba(38, 112, 75, 0.94));
+        linear-gradient(135deg, rgb(186 255 217 / 0.9), rgb(38 112 75 / 0.94));
     box-shadow:
-        0 8px 18px rgba(8, 18, 14, 0.22),
-        0 0 0 1px rgba(190, 255, 224, 0.12);
+        0 8px 18px rgb(8 18 14 / 0.22),
+        0 0 0 1px rgb(190 255 224 / 0.12);
     opacity: 0;
     animation: contact-toast-fragment 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: var(--fragment-delay);
     transform-origin: center;
 }
 
+/* Contact details panel */
 .contact__details-list {
     display: grid;
     gap: 12px;
@@ -218,8 +223,8 @@
     gap: 6px;
     padding: 14px 16px;
     border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgb(255 255 255 / 0.07);
+    background: rgb(255 255 255 / 0.03);
 }
 
 .contact__details-item dt {
@@ -228,15 +233,16 @@
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(213, 220, 231, 0.48);
+    color: rgb(213 220 231 / 0.48);
 }
 
 .contact__details-item dd {
     margin: 0;
-    color: rgba(244, 247, 252, 0.9);
+    color: rgb(244 247 252 / 0.9);
     line-height: 1.6;
 }
 
+/* Decorative signal lines */
 .contact__signal {
     position: absolute;
     inset: 0;
@@ -253,7 +259,7 @@
     left: 18%;
     right: 18%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(109, 233, 165, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgb(109 233 165 / 0.4), transparent);
 }
 
 .contact__signal-line--1 {
@@ -268,8 +274,8 @@
     width: 10px;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: rgba(165, 255, 202, 0.92);
-    box-shadow: 0 0 0 7px rgba(102, 212, 150, 0.1), 0 0 18px rgba(109, 233, 165, 0.34);
+    background: rgb(165 255 202 / 0.92);
+    box-shadow: 0 0 0 7px rgb(102 212 150 / 0.1), 0 0 18px rgb(109 233 165 / 0.34);
 }
 
 .contact__signal-dot--1 {
@@ -287,6 +293,7 @@
     right: 24%;
 }
 
+/* Contact flow summary */
 .contact__summary {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -299,13 +306,14 @@
     padding: 22px;
     border-radius: 22px;
     border: 1px solid var(--contact-border);
-    background: linear-gradient(180deg, rgba(9, 13, 23, 0.84), rgba(7, 10, 18, 0.72));
+    background: linear-gradient(180deg, rgb(9 13 23 / 0.84), rgb(7 10 18 / 0.72));
 }
 
 .contact__summary-title {
     font-size: 1.2rem;
 }
 
+/* Responsive */
 @media (max-width: 1024px) {
     .contact__layout {
         grid-template-columns: 1fr;
@@ -355,6 +363,23 @@
         bottom: 22px;
         padding: 11px 14px;
         font-size: 0.84rem;
+    }
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .contact__button,
+    .contact__copy-toast,
+    .contact__signal-dot {
+        transition: none;
+    }
+
+    .contact__button.is-pressing {
+        animation: none;
+    }
+
+    .contact__copy-fragment {
+        animation: none;
     }
 }
 

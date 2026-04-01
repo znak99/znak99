@@ -1,5 +1,5 @@
 // 스킬 탭과 레벨 그래프 렌더링, 최초 1회 애니메이션 조건을 관리한다.
-import { DEFAULT_LANGUAGE, I18N } from "./i18n.js";
+import { getTranslation } from "./language.js";
 
 const DEFAULT_TAB = "frontend";
 const SKILLS_ANIMATION_STAGGER_MS = 70;
@@ -301,15 +301,6 @@ const SKILL_DATA = {
     ]
 };
 
-function getCurrentLanguage() {
-    const language = document.documentElement.lang;
-    return Object.hasOwn(I18N, language) ? language : DEFAULT_LANGUAGE;
-}
-
-function getTranslation() {
-    return I18N[getCurrentLanguage()];
-}
-
 function createSkillRow(skill, index) {
     const item = document.createElement("article");
     item.className = "skills-board__row";
@@ -431,18 +422,12 @@ export function initializeSkillsBoard() {
     };
 
     // 첫 화면 로드에서는 그래프를 미리 채우지 않고, 실제로 보일 때만 애니메이션한다.
-    const renderChart = ({ animate = false, revealImmediately = false } = {}) => {
+    const renderChart = ({ animate = false } = {}) => {
         const skills = SKILL_DATA[activeTab] ?? [];
         const rows = skills.map(createSkillRow);
 
         chart.classList.remove("is-animated");
         chart.replaceChildren(...rows);
-
-        if (revealImmediately) {
-            rows.forEach((row) => row.classList.add("is-visible", "is-static"));
-            chart.classList.add("is-animated");
-            return;
-        }
 
         if (animate) {
             window.requestAnimationFrame(() => {

@@ -1,9 +1,9 @@
 // 프로젝트 선택 버튼과 상단 featured 패널을 동기화한다.
-import { DEFAULT_LANGUAGE, I18N } from "./i18n.js";
+import { REDUCED_MOTION_QUERY } from "./i18n.js";
+import { getTranslation } from "./language.js";
 
 const DEFAULT_PROJECT_KEY = "simpleboard";
 const FEATURED_HEIGHT_TRANSITION_MS = 420;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const PROJECTS = {
     simpleboard: {
         titleKey: "projects_featured_title",
@@ -55,15 +55,6 @@ const PROJECTS = {
         tags: ["Dashboard", "Hierarchy", "Readability"]
     }
 };
-
-function getCurrentLanguage() {
-    const language = document.documentElement.lang;
-    return Object.hasOwn(I18N, language) ? language : DEFAULT_LANGUAGE;
-}
-
-function getTranslation() {
-    return I18N[getCurrentLanguage()];
-}
 
 function formatProjectCount(count, translation) {
     const template = translation.projects_selector_count ?? "{count} PROJECTS";
@@ -156,6 +147,7 @@ export function initializeProjectsSection() {
     const reducedMotionMedia = window.matchMedia(REDUCED_MOTION_QUERY);
     let heightResetTimerId = 0;
 
+    // 프로젝트 선택 버튼의 활성 상태와 접근성 속성을 갱신한다.
     const updateButtons = () => {
         buttons.forEach((button) => {
             const isActive = button.dataset.projectKey === activeProjectKey;
@@ -176,6 +168,7 @@ export function initializeProjectsSection() {
         });
     };
 
+    // 현재 선택된 프로젝트의 제목, 설명, 미디어, 링크를 featured 패널에 반영한다.
     const applyProjectContent = () => {
         const translation = getTranslation();
         const project = PROJECTS[activeProjectKey] ?? PROJECTS[DEFAULT_PROJECT_KEY];
@@ -220,6 +213,7 @@ export function initializeProjectsSection() {
         featured.classList.remove("is-resizing");
     };
 
+    // 콘텐츠를 갱신하고 필요 시 높이 변화를 애니메이션으로 처리한다.
     const render = ({ animateHeight = false } = {}) => {
         if (!animateHeight || reducedMotionMedia.matches) {
             applyProjectContent();

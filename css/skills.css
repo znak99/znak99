@@ -51,6 +51,9 @@
     max-width: none;
 }
 
+/* WIP: .skills__grid and related group styles below are not yet used in index.html.
+   They are reserved for a planned grid-based skills layout and will be wired up
+   once the HTML structure is finalized. */
 .skills__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
