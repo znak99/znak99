@@ -26,6 +26,7 @@
     padding-bottom: 48px;
 }
 
+/* base.css의 .section__inner에 설정된 align-items를 Overview 전용으로 덮어쓴다. */
 .section--overview .section__inner {
     max-width: 1320px;
     padding: 56px;
