@@ -19,13 +19,13 @@ function finishInitialLoad() {
     });
 }
 
-function initializePortfolio() {
+async function initializePortfolio() {
     try {
         initializeBackgroundMotion();
         initializeContactActions();
         initializeHeader();
         initializeLanguageSwitcher();
-        initializeProjectsSection();
+        await initializeProjectsSection();
         initializeSkillsBoard();
     } catch (error) {
         // 초기화 실패 시 콘솔에 기록하고 로딩 화면은 정상 종료한다.

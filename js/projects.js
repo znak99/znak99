@@ -1,60 +1,22 @@
-// 프로젝트 선택 버튼과 상단 featured 패널을 동기화한다.
+// 프로젝트 데이터를 my-projects.json에서 불러와 선택 버튼과 featured 패널을 동기화한다.
 import { REDUCED_MOTION_QUERY } from "./i18n.js";
-import { getTranslation } from "./language.js";
+import { getCurrentLanguage, getTranslation } from "./language.js";
 
-const DEFAULT_PROJECT_KEY = "simpleboard";
 const FEATURED_HEIGHT_TRANSITION_MS = 420;
-const PROJECTS = {
-    simpleboard: {
-        titleKey: "projects_featured_title",
-        textKey: "projects_featured_text",
-        image: "assets/images/projects/simple-board-preview.png",
-        github: "https://github.com/znak99/simpleboard",
-        live: "https://simple-board.site"
-    },
-    portfolio: {
-        titleKey: "projects_card_title_1",
-        textKey: "projects_card_text_1",
-        noteKey: "projects_card_note_1",
-        tags: ["Responsive UI", "Content Structure", "Accessibility"]
-    },
-    language: {
-        titleKey: "projects_card_title_2",
-        textKey: "projects_card_text_2",
-        noteKey: "projects_card_note_2",
-        tags: ["Korean / Japanese / English", "Persistence", "Metadata"]
-    },
-    motion: {
-        titleKey: "projects_card_title_3",
-        textKey: "projects_card_text_3",
-        noteKey: "projects_card_note_3",
-        tags: ["Glass UI", "Interaction", "Animation"]
-    },
-    mobilelab: {
-        titleKey: "projects_card_title_4",
-        textKey: "projects_card_text_4",
-        noteKey: "projects_card_note_4",
-        tags: ["Mobile Flow", "Button Layout", "Density"]
-    },
-    backend: {
-        titleKey: "projects_card_title_5",
-        textKey: "projects_card_text_5",
-        noteKey: "projects_card_note_5",
-        tags: ["Service Logic", "API Design", "Structure"]
-    },
-    cloud: {
-        titleKey: "projects_card_title_6",
-        textKey: "projects_card_text_6",
-        noteKey: "projects_card_note_6",
-        tags: ["Deploy Flow", "Operations", "Scalability"]
-    },
-    dashboard: {
-        titleKey: "projects_card_title_7",
-        textKey: "projects_card_text_7",
-        noteKey: "projects_card_note_7",
-        tags: ["Dashboard", "Hierarchy", "Readability"]
+
+async function loadProjects() {
+    const response = await fetch("my-projects.json");
+
+    if (!response.ok) {
+        throw new Error(`my-projects.json 로드 실패: ${response.status}`);
     }
-};
+
+    return response.json();
+}
+
+function getProjectI18n(project, language) {
+    return project.i18n?.[language] ?? project.i18n?.en ?? {};
+}
 
 function formatProjectCount(count, translation) {
     const template = translation.projects_selector_count ?? "{count} PROJECTS";
@@ -74,21 +36,24 @@ function createProjectTags(tags = []) {
     return list;
 }
 
-function createSummaryMedia(project, translation) {
+function createSummaryMedia(project, language) {
+    const i18n = getProjectI18n(project, language);
+
     const summary = document.createElement("div");
     summary.className = "projects__featured-summary";
 
+    const translation = getTranslation();
     const kicker = document.createElement("p");
     kicker.className = "projects__featured-summary-kicker";
     kicker.textContent = translation.projects_featured_label ?? "ABOUT THE PROJECT";
 
     const title = document.createElement("h4");
     title.className = "projects__featured-summary-title";
-    title.textContent = translation[project.titleKey] ?? "";
+    title.textContent = i18n.title ?? "";
 
     const note = document.createElement("p");
     note.className = "projects__featured-summary-note";
-    note.textContent = translation[project.noteKey] ?? "";
+    note.textContent = i18n.note ?? "";
 
     summary.append(kicker, title, note);
 
@@ -99,16 +64,55 @@ function createSummaryMedia(project, translation) {
     return summary;
 }
 
-function createImageMedia(project, translation) {
+function createImageMedia(project) {
     const image = document.createElement("img");
     image.className = "projects__featured-image";
     image.src = project.image;
-    image.alt = translation[project.titleKey] ?? "Project preview";
+    image.alt = "";
     image.loading = "lazy";
     return image;
 }
 
-export function initializeProjectsSection() {
+function buildSelectorButton(project, isActive) {
+    const button = document.createElement("button");
+    button.className = "projects__selector-button" + (isActive ? " is-active" : "");
+    button.type = "button";
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-selected", isActive ? "true" : "false");
+    button.dataset.projectKey = project.key;
+
+    const img = document.createElement("img");
+    img.className = "projects__selector-thumb";
+    img.src = project.thumb ?? "";
+    img.alt = "";
+    img.loading = "lazy";
+
+    const overlay = document.createElement("span");
+    overlay.className = "projects__selector-overlay";
+
+    const titleSpan = document.createElement("span");
+    titleSpan.className = "projects__selector-title";
+
+    overlay.append(titleSpan);
+    button.append(img, overlay);
+
+    return button;
+}
+
+export async function initializeProjectsSection() {
+    let data;
+
+    try {
+        data = await loadProjects();
+    } catch (error) {
+        console.error("[portfolio] 프로젝트 데이터 로드 오류:", error);
+        return;
+    }
+
+    const projectsList = Array.isArray(data?.projects) ? data.projects : [];
+    const defaultKey = data?.defaultKey ?? projectsList[0]?.key ?? "";
+    const projectsMap = new Map(projectsList.map((p) => [p.key, p]));
+
     const section = document.querySelector(".section--projects");
     const featured = section?.querySelector(".projects__featured");
     const featuredLabel = section?.querySelector('[data-project-target="label"]');
@@ -119,7 +123,7 @@ export function initializeProjectsSection() {
     const featuredActions = section?.querySelector('[data-project-target="actions"]');
     const githubLink = section?.querySelector('[data-project-target="github"]');
     const liveLink = section?.querySelector('[data-project-target="live"]');
-    const buttons = [...(section?.querySelectorAll("[data-project-key]") ?? [])];
+    const selectorEl = section?.querySelector(".projects__selector");
 
     if (
         !section
@@ -132,29 +136,45 @@ export function initializeProjectsSection() {
         || !featuredActions
         || !githubLink
         || !liveLink
-        || buttons.length === 0
+        || !selectorEl
+        || projectsList.length === 0
     ) {
         return;
     }
 
-    let activeProjectKey = buttons.find((button) => button.classList.contains("is-active"))?.dataset.projectKey
-        ?? DEFAULT_PROJECT_KEY;
+    // 선택 버튼을 JSON 데이터 기준으로 동적 생성한다.
+    projectsList.forEach((project) => {
+        selectorEl.append(buildSelectorButton(project, project.key === defaultKey));
+    });
 
-    if (!Object.hasOwn(PROJECTS, activeProjectKey)) {
-        activeProjectKey = DEFAULT_PROJECT_KEY;
+    const buttons = [...selectorEl.querySelectorAll("[data-project-key]")];
+
+    let activeProjectKey = defaultKey;
+
+    if (!projectsMap.has(activeProjectKey)) {
+        activeProjectKey = projectsList[0]?.key ?? "";
     }
 
     const reducedMotionMedia = window.matchMedia(REDUCED_MOTION_QUERY);
     let heightResetTimerId = 0;
 
-    // 프로젝트 선택 버튼의 활성 상태와 접근성 속성을 갱신한다.
+    // 선택 버튼의 활성 상태, 접근성 속성, 버튼 제목을 갱신한다.
     const updateButtons = () => {
+        const language = getCurrentLanguage();
+
         buttons.forEach((button) => {
             const isActive = button.dataset.projectKey === activeProjectKey;
             button.classList.toggle("is-active", isActive);
             button.setAttribute("aria-selected", String(isActive));
             button.setAttribute("aria-controls", "projects-featured");
             button.tabIndex = 0;
+
+            const project = projectsMap.get(button.dataset.projectKey);
+            const titleEl = button.querySelector(".projects__selector-title");
+
+            if (project && titleEl) {
+                titleEl.textContent = getProjectI18n(project, language).title ?? "";
+            }
         });
     };
 
@@ -171,27 +191,24 @@ export function initializeProjectsSection() {
     // 현재 선택된 프로젝트의 제목, 설명, 미디어, 링크를 featured 패널에 반영한다.
     const applyProjectContent = () => {
         const translation = getTranslation();
-        const project = PROJECTS[activeProjectKey] ?? PROJECTS[DEFAULT_PROJECT_KEY];
-        const title = translation[project.titleKey] ?? "";
-        const text = translation[project.textKey] ?? "";
+        const language = getCurrentLanguage();
+        const project = projectsMap.get(activeProjectKey) ?? projectsList[0];
+        const i18n = getProjectI18n(project, language);
 
         featuredCount.textContent = formatProjectCount(buttons.length, translation);
         featuredLabel.textContent = translation.projects_featured_label ?? "ABOUT THE PROJECT";
-        featuredTitle.textContent = title;
-        featuredText.textContent = text;
+        featuredTitle.textContent = i18n.title ?? "";
+        featuredText.textContent = i18n.text ?? "";
         featuredMedia.replaceChildren(
             project.image
-                ? createImageMedia(project, translation)
-                : createSummaryMedia(project, translation)
+                ? createImageMedia(project)
+                : createSummaryMedia(project, language)
         );
 
         if (project.github) {
             githubLink.hidden = false;
             githubLink.href = project.github;
-            githubLink.setAttribute(
-                "aria-label",
-                translation.projects_featured_github_aria ?? "Open GitHub repository"
-            );
+            githubLink.setAttribute("aria-label", i18n.githubAria ?? "Open GitHub repository");
         } else {
             githubLink.hidden = true;
         }
@@ -253,7 +270,7 @@ export function initializeProjectsSection() {
 
             if (
                 !nextProjectKey
-                || !Object.hasOwn(PROJECTS, nextProjectKey)
+                || !projectsMap.has(nextProjectKey)
                 || nextProjectKey === activeProjectKey
             ) {
                 return;
@@ -277,6 +294,6 @@ export function initializeProjectsSection() {
     document.addEventListener("portfolio:languagechange", () => {
         render();
     });
-    updateButtons();
+
     render();
 }

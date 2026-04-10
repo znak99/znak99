@@ -1,0 +1,23 @@
+# Claude Code
+.claude/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# Vim / Emacs
+*.swp
+*.swo
+*~
