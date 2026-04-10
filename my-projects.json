@@ -24,6 +24,54 @@
                     "githubAria": "Open the Simple Board GitHub repository"
                 }
             }
+        },
+        {
+            "key": "think what",
+            "thumb": "assets/images/projects/think-what-preview.png",
+            "image": "assets/images/projects/think-what-preview.png",
+            "github": "https://github.com/znak99/think-what",
+            "live": null,
+            "i18n": {
+                "ko": {
+                    "title": "Think What",
+                    "text": "그림을 통해 한글 초성을 맞추는 게임으로, 누구나 함께 즐길 수 있습니다. 또한 랭킹 기능을 추가하여 사용자들의 참여와 경쟁심을 높였습니다.",
+                    "githubAria": "Think What GitHub 저장소 열기"
+                },
+                "ja": {
+                    "title": "Think What",
+                    "text": "イラストを見て韓国語の頭子音を当てるゲームで、誰でも一緒に楽しめます。さらにランキング機能を追加し、ユーザーの参加意欲と競争心を高めました。",
+                    "githubAria": "Think What の GitHub リポジトリを開く"
+                },
+                "en": {
+                    "title": "Think What",
+                    "text": "A game where players guess Korean initial consonants based on images, designed for everyone to enjoy together. A ranking system was also added to boost user engagement and competitiveness.",
+                    "githubAria": "Open the Think What GitHub repository"
+                }
+            }
+        },
+        {
+            "key": "browser to pdf",
+            "thumb": "assets/images/projects/browser-to-pdf-preview.png",
+            "image": "assets/images/projects/browser-to-pdf-preview.png",
+            "github": "https://github.com/znak99/browser-to-pdf",
+            "live": null,
+            "i18n": {
+                "ko": {
+                    "title": "Browser to PDF",
+                    "text": "현재 브라우저에 표시된 웹페이지를 PDF 파일로 변환할 수 있는 API를 제공하는 사이트입니다.",
+                    "githubAria": "Browser to PDF GitHub 저장소 열기"
+                },
+                "ja": {
+                    "title": "Browser to PDF",
+                    "text": "現在ブラウザに表示されているWebページをPDFファイルに変換できるAPIを提供するサービスです。",
+                    "githubAria": "Browser to PDF の GitHub リポジトリを開く"
+                },
+                "en": {
+                    "title": "Browser to PDF",
+                    "text": "A service that provides an API for converting the currently displayed web page in a browser into a PDF file.",
+                    "githubAria": "Open the Browser to PDF GitHub repository"
+                }
+            }
         }
     ]
 }
