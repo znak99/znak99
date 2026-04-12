@@ -1,26 +1,51 @@
 {
     "projects": [
         {
+            "key": "stock trading bot",
+            "thumb": "assets/images/projects/stock-trading-bot-preview.png",
+            "image": "assets/images/projects/stock-trading-bot-preview.png",
+            "github": "https://github.com/znak99/stock-trading-bot",
+            "live": null,
+            "skills": ["Python"],
+            "i18n": {
+                "ko": {
+                    "title": "Stock Trading Bot",
+                    "text": "이 서비스는 시장 데이터를 기반으로 자동으로 매수·매도를 수행하는 주식 자동매매 시스템입니다. AI를 활용해 종목 후보를 분석하고 투자 우선순위를 제안하여, 반복적인 거래를 효율적으로 처리하면서도 일관된 투자 전략을 유지할 수 있도록 돕습니다.",
+                    "githubAria": "Stock Trading Bot GitHub 저장소 열기"
+                },
+                "ja": {
+                    "title": "Stock Trading Bot",
+                    "text": "このサービスは、市場データをもとに自動で売買を行う株式自動取引システムです。AIを活用して銘柄候補を分析し、投資の優先順位を提案することで、繰り返しの取引を効率化しながら一貫した投資戦略を維持できるよう支援します。",
+                    "githubAria": "Stock Trading Bot の GitHub リポジトリを開く"
+                },
+                "en": {
+                    "title": "Stock Trading Bot",
+                    "text": "This service is an automated stock trading system that executes buy and sell orders based on market data. It leverages AI to analyze stock candidates and suggest investment priorities, helping users maintain consistent strategies while improving efficiency in repetitive trading.",
+                    "githubAria": "Open the Stock Trading Bot GitHub repository"
+                }
+            }
+        },
+        {
             "key": "simpleboard",
             "thumb": "assets/images/projects/simple-board-preview.png",
             "image": "assets/images/projects/simple-board-preview.png",
             "github": "https://github.com/znak99/simpleboard",
             "live": "https://simple-board.site",
-            "skills": ["Java", "Spring Boot", "MySQL"],
+            "skills": ["Java", "Spring Boot", "PostgreSQL", "Docker"],
             "i18n": {
                 "ko": {
                     "title": "Simple Board",
-                    "text": "게시글 목록 조회, 로그인, 글 작성처럼 기본적인 게시판 흐름을 가볍고 직관적으로 정리한 프로젝트입니다. 복잡하지 않은 화면 안에서 읽기와 작성, 소통이 자연스럽게 이어지도록 구성했습니다.",
+                    "text": "이 서비스는 누구나 쉽게 글을 읽고 작성하며 소통할 수 있도록 설계된 간단한 게시판 플랫폼입니다. 복잡한 기능 없이도 자연스럽게 콘텐츠를 공유하고 상호작용할 수 있도록 직관적인 흐름을 제공합니다.",
                     "githubAria": "Simple Board GitHub 저장소 열기"
                 },
                 "ja": {
                     "title": "Simple Board",
-                    "text": "投稿一覧の閲覧、ログイン、投稿作成といった掲示板の基本的な流れを、軽く直感的に整理したプロジェクトです。複雑に見せず、読むこと・書くこと・やり取りすることが自然につながるように構成しました。",
+                    "text": "このサービスは、誰でも簡単に投稿を読んだり書いたりしながら交流できるシンプルな掲示板プラットフォームです。複雑な機能を排除し、自然にコンテンツ共有とコミュニケーションが行える直感的な体験を提供します。",
                     "githubAria": "Simple Board の GitHub リポジトリを開く"
                 },
                 "en": {
                     "title": "Simple Board",
-                    "text": "This project organizes the core flow of a lightweight board app, including browsing posts, logging in, and writing entries. The focus was on keeping the UI simple while making reading, writing, and interaction feel natural.",
+                    "text": "This service is a lightweight board platform designed for easy reading, writing, and interaction. It provides a clean and intuitive experience that allows users to share content and communicate naturally without unnecessary complexity.",
                     "githubAria": "Open the Simple Board GitHub repository"
                 }
             }
@@ -31,22 +56,72 @@
             "image": "assets/images/projects/think-what-preview.png",
             "github": "https://github.com/znak99/think-what",
             "live": null,
-            "skills": ["Swift", "SwiftUI"],
+            "skills": ["React", "FastAPI", "Claude Code"],
             "i18n": {
                 "ko": {
                     "title": "Think What",
-                    "text": "그림을 통해 한글 초성을 맞추는 게임으로, 누구나 함께 즐길 수 있습니다. 또한 랭킹 기능을 추가하여 사용자들의 참여와 경쟁심을 높였습니다.",
+                    "text": "이 서비스는 이미지를 보고 한글 초성을 맞추는 방식으로 즐길 수 있는 인터랙티브 퀴즈 게임입니다. 누구나 쉽게 참여할 수 있으며, 랭킹 시스템을 통해 사용자 간 경쟁과 참여를 자연스럽게 유도합니다.",
                     "githubAria": "Think What GitHub 저장소 열기"
                 },
                 "ja": {
                     "title": "Think What",
-                    "text": "イラストを見て韓国語の頭子音を当てるゲームで、誰でも一緒に楽しめます。さらにランキング機能を追加し、ユーザーの参加意欲と競争心を高めました。",
+                    "text": "このサービスは、画像を見て韓国語の頭子音を当てるインタラクティブなクイズゲームです。誰でも気軽に参加でき、ランキング機能によってユーザー同士の競争と参加意欲を高めます。",
                     "githubAria": "Think What の GitHub リポジトリを開く"
                 },
                 "en": {
                     "title": "Think What",
-                    "text": "A game where players guess Korean initial consonants based on images, designed for everyone to enjoy together. A ranking system was also added to boost user engagement and competitiveness.",
+                    "text": "This service is an interactive quiz game where users guess Korean initial consonants based on images. It is designed for easy participation, with a ranking system that naturally encourages engagement and competition.",
                     "githubAria": "Open the Think What GitHub repository"
+                }
+            }
+        },
+        {
+            "key": "led board external display",
+            "thumb": "assets/images/projects/led-board-external-display-preview.png",
+            "image": "assets/images/projects/led-board-external-display-preview.png",
+            "github": "https://github.com/znak99/JEC-LEDBoardExternalDisplay",
+            "live": null,
+            "skills": ["SwiftUI", "MVVM"],
+            "i18n": {
+                "ko": {
+                    "title": "LEDBoard External Display",
+                    "text": "이 서비스는 아이폰을 외부 디스플레이와 연결해 입력한 메시지를 LED 전광판처럼 표시할 수 있도록 해주는 iOS앱입니다.",
+                    "githubAria": "LEDBoard External Display GitHub 저장소 열기"
+                },
+                "ja": {
+                    "title": "LEDBoard External Display",
+                    "text": "このサービスは、iPhoneを外部ディスプレイに接続し、入力したメッセージをLED掲示板のように表示できるiOSアプリです。",
+                    "githubAria": "LEDBoard External Display の GitHub リポジトリを開く"
+                },
+                "en": {
+                    "title": "LEDBoard External Display",
+                    "text": "This iOS app turns an external display connected to an iPhone into an LED-style message board.",
+                    "githubAria": "Open the LEDBoard External Display GitHub repository"
+                }
+            }
+        },
+        {
+            "key": "github search",
+            "thumb": "assets/images/projects/github-search-preview.png",
+            "image": "assets/images/projects/github-search-preview.png",
+            "github": "https://github.com/znak99/github-search",
+            "live": null,
+            "skills": ["SwiftUI", "GitHub API"],
+            "i18n": {
+                "ko": {
+                    "title": "GitHub Search",
+                    "text": "이 서비스는 키워드를 기반으로 GitHub 저장소를 빠르게 탐색할 수 있도록 도와주는 iOS앱입니다. 필요한 프로젝트를 쉽게 찾고 내용을 확인할 수 있도록 간결하고 직관적인 탐색 경험을 제공합니다.",
+                    "githubAria": "GitHub Search GitHub 저장소 열기"
+                },
+                "ja": {
+                    "title": "GitHub Search",
+                    "text": "このサービスは、キーワードをもとにGitHubリポジトリを素早く探せるiOSアプリです。必要なプロジェクトを簡単に見つけ、内容を確認できるよう、シンプルで直感的な検索体験を提供します。",
+                    "githubAria": "GitHub Search の GitHub リポジトリを開く"
+                },
+                "en": {
+                    "title": "GitHub Search",
+                    "text": "This iOS app helps users quickly discover GitHub repositories using keyword-based search. It provides a clean and intuitive experience for finding and exploring relevant projects with ease.",
+                    "githubAria": "Open the GitHub Search GitHub repository"
                 }
             }
         },
@@ -56,21 +131,21 @@
             "image": "assets/images/projects/browser-to-pdf-preview.png",
             "github": "https://github.com/znak99/browser-to-pdf",
             "live": "https://browser-to-pdf.onrender.com/",
-            "skills": ["Python", "FastAPI", "Playwright"],
+            "skills": ["Python", "FastAPI"],
             "i18n": {
                 "ko": {
                     "title": "Browser to PDF",
-                    "text": "현재 브라우저에 표시된 웹페이지를 PDF 파일로 변환할 수 있는 API를 제공하는 사이트입니다.",
+                    "text": "이 서비스는 웹페이지를 PDF 파일로 변환할 수 있는 기능을 제공하는 API 기반 도구입니다. 브라우저에 표시된 콘텐츠를 그대로 문서화하여 저장하거나 공유할 수 있도록 지원합니다.",
                     "githubAria": "Browser to PDF GitHub 저장소 열기"
                 },
                 "ja": {
                     "title": "Browser to PDF",
-                    "text": "現在ブラウザに表示されているWebページをPDFファイルに変換できるAPIを提供するサービスです。",
+                    "text": "このサービスは、WebページをPDFファイルに変換できるAPIベースのツールです。ブラウザに表示された内容をそのまま文書として保存・共有できるようサポートします。",
                     "githubAria": "Browser to PDF の GitHub リポジトリを開く"
                 },
                 "en": {
                     "title": "Browser to PDF",
-                    "text": "A service that provides an API for converting the currently displayed web page in a browser into a PDF file.",
+                    "text": "This service provides an API that converts web pages into PDF documents. It allows users to capture and share browser content as files in a simple and reliable way.",
                     "githubAria": "Open the Browser to PDF GitHub repository"
                 }
             }
