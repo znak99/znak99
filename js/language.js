@@ -1,5 +1,5 @@
 // 다국어 상태와 메타데이터, 언어 전환 효과를 한곳에서 관리한다.
-import { DEFAULT_LANGUAGE, REDUCED_MOTION_QUERY, STORAGE_KEYS, I18N } from "./i18n.js";
+import { DEFAULT_LANGUAGE, REDUCED_MOTION_QUERY, STORAGE_KEYS, I18N, STATIC_TEXT } from "./i18n.js";
 
 const SUPPORTED_LANGUAGES = new Set(Object.keys(I18N));
 const LANGUAGE_BUTTON_SELECTOR = ".lang-switch__button[data-lang]";
@@ -30,7 +30,7 @@ export function getCurrentLanguage() {
 }
 
 export function getTranslation(language = currentLanguage) {
-    return I18N[isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE];
+    return { ...STATIC_TEXT, ...I18N[isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE] };
 }
 
 function getHeadContent(language = currentLanguage) {
