@@ -65,12 +65,37 @@ function createSummaryMedia(project, language) {
 }
 
 function createImageMedia(project) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "projects__media-wrapper";
+
     const image = document.createElement("img");
     image.className = "projects__featured-image";
     image.src = project.image;
     image.alt = "";
     image.loading = "lazy";
-    return image;
+
+    wrapper.append(image);
+
+    if (project.github) {
+        const overlay = document.createElement("div");
+        overlay.className = "projects__media-overlay";
+        overlay.setAttribute("aria-hidden", "true");
+
+        const btn = document.createElement("button");
+        btn.className = "projects__media-github-btn";
+        btn.type = "button";
+        btn.tabIndex = -1;
+        const translation = getTranslation();
+        btn.textContent = translation.projects_image_github_hover ?? "Explore on GitHub";
+        btn.addEventListener("click", () => {
+            window.open(project.github, "_blank", "noreferrer");
+        });
+
+        overlay.append(btn);
+        wrapper.append(overlay);
+    }
+
+    return wrapper;
 }
 
 function buildSelectorButton(project, isActive) {
@@ -110,7 +135,7 @@ export async function initializeProjectsSection() {
     }
 
     const projectsList = Array.isArray(data?.projects) ? data.projects : [];
-    const defaultKey = data?.defaultKey ?? projectsList[0]?.key ?? "";
+    const defaultKey = projectsList[0]?.key ?? "";
     const projectsMap = new Map(projectsList.map((p) => [p.key, p]));
 
     const section = document.querySelector(".section--projects");
@@ -120,6 +145,7 @@ export async function initializeProjectsSection() {
     const featuredTitle = section?.querySelector('[data-project-target="title"]');
     const featuredText = section?.querySelector('[data-project-target="text"]');
     const featuredMedia = section?.querySelector('[data-project-target="media"]');
+    const featuredSkills = section?.querySelector('[data-project-target="skills"]');
     const featuredActions = section?.querySelector('[data-project-target="actions"]');
     const githubLink = section?.querySelector('[data-project-target="github"]');
     const liveLink = section?.querySelector('[data-project-target="live"]');
@@ -132,6 +158,7 @@ export async function initializeProjectsSection() {
         || !featuredCount
         || !featuredTitle
         || !featuredText
+        || !featuredSkills
         || !featuredMedia
         || !featuredActions
         || !githubLink
@@ -199,6 +226,18 @@ export async function initializeProjectsSection() {
         featuredLabel.textContent = translation.projects_featured_label ?? "ABOUT THE PROJECT";
         featuredTitle.textContent = i18n.title ?? "";
         featuredText.textContent = i18n.text ?? "";
+
+        const skills = Array.isArray(project.skills) ? project.skills : [];
+        featuredSkills.hidden = skills.length === 0;
+        featuredSkills.replaceChildren(
+            ...skills.map((skill) => {
+                const tag = document.createElement("span");
+                tag.className = "projects__featured-skill";
+                tag.textContent = skill;
+                return tag;
+            })
+        );
+
         featuredMedia.replaceChildren(
             project.image
                 ? createImageMedia(project)
