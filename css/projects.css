@@ -92,6 +92,30 @@
     line-height: 1.78;
 }
 
+.projects__featured-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.projects__featured-skills[hidden] {
+    display: none;
+}
+
+.projects__featured-skill {
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1px solid rgb(var(--color-accent-rgb) / 0.32);
+    background: rgb(var(--color-accent-rgb) / 0.07);
+    color: rgb(var(--color-accent-rgb) / 0.88);
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    box-shadow: 0 0 8px rgb(var(--color-accent-rgb) / 0.12);
+}
+
 .projects__featured-actions {
     display: flex;
     align-items: center;
@@ -174,6 +198,60 @@
     border-radius: 16px;
     object-fit: contain;
     object-position: center top;
+}
+
+.projects__media-wrapper {
+    position: relative;
+    width: 100%;
+    display: grid;
+}
+
+.projects__media-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0 0 0 / 0);
+    opacity: 0;
+    transition:
+        background var(--transition-normal),
+        opacity var(--transition-normal);
+    pointer-events: none;
+}
+
+.projects__media-github-btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.24);
+    background: rgb(8 12 22 / 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgb(245 248 252 / 0.94);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .projects__media-wrapper:hover .projects__media-overlay {
+        background: rgb(0 0 0 / 0.54);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .projects__media-github-btn:hover,
+    .projects__media-github-btn:focus-visible {
+        transform: translateY(-2px);
+        background: rgb(8 12 22 / 0.88);
+        border-color: rgb(255 255 255 / 0.4);
+    }
 }
 
 .projects__featured-summary {
@@ -423,7 +501,9 @@
 @media (prefers-reduced-motion: reduce) {
     .projects__selector-thumb,
     .projects__selector-overlay,
-    .projects__featured-link {
+    .projects__featured-link,
+    .projects__media-overlay,
+    .projects__media-github-btn {
         transition: none;
     }
 }

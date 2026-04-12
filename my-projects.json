@@ -1,5 +1,4 @@
 {
-    "defaultKey": "simpleboard",
     "projects": [
         {
             "key": "simpleboard",
@@ -7,6 +6,7 @@
             "image": "assets/images/projects/simple-board-preview.png",
             "github": "https://github.com/znak99/simpleboard",
             "live": "https://simple-board.site",
+            "skills": ["Java", "Spring Boot", "MySQL"],
             "i18n": {
                 "ko": {
                     "title": "Simple Board",
@@ -31,6 +31,7 @@
             "image": "assets/images/projects/think-what-preview.png",
             "github": "https://github.com/znak99/think-what",
             "live": null,
+            "skills": ["Swift", "SwiftUI"],
             "i18n": {
                 "ko": {
                     "title": "Think What",
@@ -54,7 +55,8 @@
             "thumb": "assets/images/projects/browser-to-pdf-preview.png",
             "image": "assets/images/projects/browser-to-pdf-preview.png",
             "github": "https://github.com/znak99/browser-to-pdf",
-            "live": null,
+            "live": "https://browser-to-pdf.onrender.com/",
+            "skills": ["Python", "FastAPI", "Playwright"],
             "i18n": {
                 "ko": {
                     "title": "Browser to PDF",
