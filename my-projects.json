@@ -2,8 +2,8 @@
     "projects": [
         {
             "key": "stock trading bot",
-            "thumb": "assets/images/projects/stock-trading-bot-preview.png",
-            "image": "assets/images/projects/stock-trading-bot-preview.png",
+            "thumb": "assets/images/projects/stock-trading-bot-preview.webp",
+            "image": "assets/images/projects/stock-trading-bot-preview.webp",
             "github": "https://github.com/znak99/stock-trading-bot",
             "live": null,
             "skills": ["Python", "Docker"],
@@ -27,8 +27,8 @@
         },
         {
             "key": "olive tracker",
-            "thumb": "assets/images/projects/olive-tracker-preview.png",
-            "image": "assets/images/projects/olive-tracker-preview.png",
+            "thumb": "assets/images/projects/olive-tracker-preview.webp",
+            "image": "assets/images/projects/olive-tracker-preview.webp",
             "github": "https://github.com/znak99/olive-tracker",
             "live": null,
             "skills": ["React", "GAS", "PWA", "Cloudflare"],
@@ -52,8 +52,8 @@
         },
         {
             "key": "simpleboard",
-            "thumb": "assets/images/projects/simple-board-preview.png",
-            "image": "assets/images/projects/simple-board-preview.png",
+            "thumb": "assets/images/projects/simple-board-preview.webp",
+            "image": "assets/images/projects/simple-board-preview.webp",
             "github": "https://github.com/znak99/simpleboard",
             "live": "https://simple-board.site",
             "skills": ["Java", "Spring Boot", "PostgreSQL", "Docker"],
@@ -77,8 +77,8 @@
         },
         {
             "key": "think what",
-            "thumb": "assets/images/projects/think-what-preview.png",
-            "image": "assets/images/projects/think-what-preview.png",
+            "thumb": "assets/images/projects/think-what-preview.webp",
+            "image": "assets/images/projects/think-what-preview.webp",
             "github": "https://github.com/znak99/think-what",
             "live": null,
             "skills": ["React", "FastAPI", "Claude Code"],
@@ -102,8 +102,8 @@
         },
         {
             "key": "led board external display",
-            "thumb": "assets/images/projects/led-board-external-display-preview.png",
-            "image": "assets/images/projects/led-board-external-display-preview.png",
+            "thumb": "assets/images/projects/led-board-external-display-preview.webp",
+            "image": "assets/images/projects/led-board-external-display-preview.webp",
             "github": "https://github.com/znak99/JEC-LEDBoardExternalDisplay",
             "live": null,
             "skills": ["SwiftUI", "MVVM"],
@@ -127,8 +127,8 @@
         },
         {
             "key": "github search",
-            "thumb": "assets/images/projects/github-search-preview.png",
-            "image": "assets/images/projects/github-search-preview.png",
+            "thumb": "assets/images/projects/github-search-preview.webp",
+            "image": "assets/images/projects/github-search-preview.webp",
             "github": "https://github.com/znak99/github-search",
             "live": null,
             "skills": ["SwiftUI", "GitHub API"],
@@ -152,8 +152,8 @@
         },
         {
             "key": "browser to pdf",
-            "thumb": "assets/images/projects/browser-to-pdf-preview.png",
-            "image": "assets/images/projects/browser-to-pdf-preview.png",
+            "thumb": "assets/images/projects/browser-to-pdf-preview.webp",
+            "image": "assets/images/projects/browser-to-pdf-preview.webp",
             "github": "https://github.com/znak99/browser-to-pdf",
             "live": "https://browser-to-pdf.onrender.com/",
             "skills": ["Python", "FastAPI"],
