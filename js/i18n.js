@@ -38,7 +38,7 @@ export const STATIC_TEXT = Object.freeze({
 
 export const I18N = Object.freeze({
     ko: Object.freeze({
-        site_last_updated: "마지막 업데이트: 2026/03/30",
+        site_last_updated: "마지막 업데이트: 2026/04/14",
         skip_to_content: "본문으로 바로가기",
         go_to_overview: "개요로 이동",
         language_switcher_label: "언어 선택",
@@ -97,7 +97,7 @@ export const I18N = Object.freeze({
         contact_github_aria: "GitHub 프로필 열기"
     }),
     ja: Object.freeze({
-        site_last_updated: "最終更新: 2026/03/30",
+        site_last_updated: "最終更新: 2026/04/14",
         skip_to_content: "本文へ移動",
         go_to_overview: "概要へ移動",
         language_switcher_label: "言語切替",
@@ -156,7 +156,7 @@ export const I18N = Object.freeze({
         contact_github_aria: "GitHub プロフィールを開く"
     }),
     en: Object.freeze({
-        site_last_updated: "Last updated: 2026/03/30",
+        site_last_updated: "Last updated: 2026/04/14",
         skip_to_content: "Skip to content",
         go_to_overview: "Go to overview",
         language_switcher_label: "Language switcher",
