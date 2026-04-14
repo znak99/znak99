@@ -6,22 +6,47 @@
             "image": "assets/images/projects/stock-trading-bot-preview.png",
             "github": "https://github.com/znak99/stock-trading-bot",
             "live": null,
-            "skills": ["Python"],
+            "skills": ["Python", "Docker"],
             "i18n": {
                 "ko": {
                     "title": "Stock Trading Bot",
-                    "text": "이 서비스는 시장 데이터를 기반으로 자동으로 매수·매도를 수행하는 주식 자동매매 시스템입니다. AI를 활용해 종목 후보를 분석하고 투자 우선순위를 제안하여, 반복적인 거래를 효율적으로 처리하면서도 일관된 투자 전략을 유지할 수 있도록 돕습니다.",
+                    "text": "이 서비스는 시장 데이터를 기반으로 자동으로 매수·매도를 수행하는 한국주식 자동매매 시스템입니다. AI를 활용해 종목 후보를 분석하고 투자 우선순위를 제안하여, 반복적인 거래를 효율적으로 처리하면서도 일관된 투자 전략을 유지할 수 있도록 돕습니다.",
                     "githubAria": "Stock Trading Bot GitHub 저장소 열기"
                 },
                 "ja": {
                     "title": "Stock Trading Bot",
-                    "text": "このサービスは、市場データをもとに自動で売買を行う株式自動取引システムです。AIを活用して銘柄候補を分析し、投資の優先順位を提案することで、繰り返しの取引を効率化しながら一貫した投資戦略を維持できるよう支援します。",
+                    "text": "このサービスは、市場データをもとに自動で売買を行う韓国株式自動取引システムです。AIを活用して銘柄候補を分析し、投資の優先順位を提案することで、繰り返しの取引を効率化しながら一貫した投資戦略を維持できるよう支援します。",
                     "githubAria": "Stock Trading Bot の GitHub リポジトリを開く"
                 },
                 "en": {
                     "title": "Stock Trading Bot",
-                    "text": "This service is an automated stock trading system that executes buy and sell orders based on market data. It leverages AI to analyze stock candidates and suggest investment priorities, helping users maintain consistent strategies while improving efficiency in repetitive trading.",
+                    "text": "This service is an Korean automated stock trading system that executes buy and sell orders based on market data. It leverages AI to analyze stock candidates and suggest investment priorities, helping users maintain consistent strategies while improving efficiency in repetitive trading.",
                     "githubAria": "Open the Stock Trading Bot GitHub repository"
+                }
+            }
+        },
+        {
+            "key": "olive tracker",
+            "thumb": "assets/images/projects/olive-tracker-preview.png",
+            "image": "assets/images/projects/olive-tracker-preview.png",
+            "github": "https://github.com/znak99/olive-tracker",
+            "live": null,
+            "skills": ["React", "GAS", "PWA", "Cloudflare"],
+            "i18n": {
+                "ko": {
+                    "title": "Olive Tracker",
+                    "text": "이 서비스는 일본 미츠이스미토모은행의 \"Olive Flexible 카드\" 사용 내역을 보다 빠르고 직관적으로 확인할 수 있도록 돕는 개인 금융 트래킹 앱입니다. 카드 결제 정보가 즉시 반영되지 않는 불편함을 해결하기 위해 제작되었으며, 실시간에 가까운 사용 내역 확인을 통해 사용자가 자신의 소비 흐름을 쉽게 파악할 수 있습니다. 또한 PWA 기반으로 설계되어 모바일 환경에서도 앱처럼 자연스럽고 편안한 사용자 경험을 제공합니다.",
+                    "githubAria": "Olive Tracker GitHub 저장소 열기"
+                },
+                "ja": {
+                    "title": "Olive Tracker",
+                    "text": "このサービスは、三井住友銀行の「Olive Flexibleカード」の利用履歴をより迅速かつ直感的に確認できるようにする個人向け金融トラッキングアプリです。カードの決済情報がすぐに反映されない不便さを解消するために開発されており、ほぼリアルタイムで利用履歴を把握することで、自分の支出の流れを簡単に理解できます。また、PWAとして構築されているため、モバイルでもアプリのように快適な操作体験を提供します。",
+                    "githubAria": "Olive Tracker の GitHub リポジトリを開く"
+                },
+                "en": {
+                    "title": "Olive Tracker",
+                    "text": "This service is a personal finance tracking app designed to help users monitor their \"Olive Flexible Card\" transactions from Sumitomo Mitsui Banking Corporation more quickly and intuitively. It addresses the inconvenience of delayed transaction updates by providing near real-time visibility into card usage, allowing users to better understand and manage their spending. Built as a PWA, it delivers a smooth, app-like experience across both desktop and mobile environments.",
+                    "githubAria": "Open the Olive Tracker GitHub repository"
                 }
             }
         },
